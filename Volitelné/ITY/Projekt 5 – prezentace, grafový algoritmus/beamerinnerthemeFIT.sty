@@ -1,0 +1,107 @@
+\ProvidesPackage{beamerinnerthemeFIT}[2015/12/07]
+% Copyright 2007 by Zdenek Vasicek <vasicek AT fit.vutbr.cz>
+% Updated 2015 by Ales Smrcka <smrcka AT fit.vutbr.cz> wrt
+%   http://www.vutbr.cz/jvs
+
+\DeclareOptionBeamer{shadow}[true]{\def\beamer@themerounded@shadow{#1}}
+\ExecuteOptionsBeamer{shadow=false}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\setbeamertemplate{blocks}[rounded][shadow=\beamer@themerounded@shadow]
+\setbeamertemplate{items}[circle]
+\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+
+%=============================================================================
+% Obsah (TOC),  (sub-)section in toc: circle
+\defbeamertemplate*{section in toc}{FIT}
+{\leavevmode\leftskip=2ex%
+  \llap{%
+    \usebeamerfont*{section number projected}%
+    \usebeamercolor{section number projected}%
+    \begin{pgfpicture}{-1ex}{0ex}{1ex}{2ex}
+      \color{bg}
+\ifbeamer@toccir%
+      \pgfpathcircle{\pgfpoint{0pt}{.75ex}}{.5ex}
+      \pgfusepath{fill}
+\else%
+  \ifbeamer@tocsqr%
+      \pgfpathrectangle{\pgfpoint{0pt}{.5ex}}{\pgfpoint{.6ex}{.6ex}}
+      \pgfusepath{fill}
+  \else%
+     \ifbeamer@tocnum%
+       \pgftext[base]{\color{fitblue}\inserttocslidenumber}%\inserttocsectionnumber}
+     \else%
+       \pgfpathrectangle{\pgfpoint{-.75ex}{-.25ex}}{\pgfpoint{1.5ex}{2ex}}
+       \pgfusepath{fill}
+       \pgftext[base]{\color{fg}\inserttocslidenumber}%\inserttocsectionnumber}
+     \fi%
+  \fi%
+\fi%
+    \end{pgfpicture}\kern1.25ex%
+  }%
+  \usebeamerfont{section in toc}\inserttocsection\par}
+
+\defbeamertemplate*{subsection in toc}{FIT}
+{\leavevmode\leftskip=2em\usebeamerfont{subsection in toc}\inserttocsubsection\par}
+
+\defbeamertemplate*{subsubsection in toc}{FIT}
+{\leavevmode\normalsize\usebeamerfont{subsection in
+    toc}\leftskip=3em\usebeamerfont{subsubsection in toc}%
+  \inserttocsubsubsection\par} 
+
+
+%=============================================================================
+\setbeamertemplate{blue page}
+{\nointerlineskip%
+ \vskip-\beamer@frametopskip%21pt%
+{\nobreak%
+\begin{beamercolorbox}[left,colsep=0pt,rounded=false,wd=\paperwidth,ht=\paperheight]{title}
+\usebeamerfont{title}
+\vbox to \paperheight {\vfill \hbox to \paperwidth {\hfill\insertbluetext\hfill }\vfill }%
+\end{beamercolorbox}%
+}%
+}
+
+\def\bluepage#1{\frame[plain]{%
+\begin{beamercolorbox}[left,colsep=0pt,rounded=false,wd=\paperwidth,ht=\paperheight]{title}
+\usebeamerfont{title}
+\vbox to \paperheight {\vfill \hbox to \paperwidth {\hfill#1\hfill }\vfill }%
+\end{beamercolorbox}%
+}}
+
+\defbeamertemplate*{title page}{fit}[1][]{%
+  \nointerlineskip%
+  \vskip-\beamer@frametopskip%21pt%
+{\nobreak%
+   \begin{beamercolorbox}[right,colsep=8pt,rightskip=.25\paperwidth plus 4em,rounded=false,wd=\paperwidth,ht=.5\paperheight#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+}%
+\nointerlineskip\vbox to 5pt{}%
+{\nointerlineskip\nobreak\begin{beamercolorbox}[left,colsep=0pt,leftskip=0pt,rounded=false,wd=\paperwidth]{author}%
+\begin{minipage}[t]{.73\paperwidth}%
+\nobreak\begin{flushright}\vbox to .25\paperheight{%
+   {\usebeamercolor{author}\color{fg}\usebeamerfont{author}\insertauthor}%
+   \vskip 0.5em%
+   {\usebeamercolor{institute}\color{fg}\usebeamerfont{institute}\insertinstitute}%
+}\end{flushright}%
+\end{minipage}%
+\end{beamercolorbox}%
+\vskip-1em%
+\hbox to .88\paperwidth {\hfill\inserttitlegraphic}%
+\begin{minipage}[t]{.65\paperwidth}%
+\nobreak\begin{flushright}%
+    {\usebeamercolor{institute}\color{fg}\usebeamerfont{institute}\insertdate}%
+\end{flushright}%
+\end{minipage}%
+}\vfill
+} 
+
+\mode<all>

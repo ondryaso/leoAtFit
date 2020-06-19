@@ -1,0 +1,579 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[czech]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{mathtools}
+\usepackage{gauss}
+\usepackage{verbatim}
+\usepackage{listings}
+
+\usepackage{amssymb}
+\usepackage{systeme}
+
+\usepackage{color}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+\sysdelim..
+
+\usepackage{array}
+\allowdisplaybreaks
+
+\makeatletter
+\newcounter{elimination@steps}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash$}p{#1}<{$}}
+\def\elimination@num@rights{}
+\def\elimination@num@variables{}
+\newenvironment{elimination}[3][0]
+{
+    \setcounter{elimination@steps}{0}
+    \def\elimination@num@rights{#1}
+    \def\elimination@num@variables{#2}
+    \renewcommand{\arraystretch}{#3}
+    \start@align\@ne\st@rredtrue\m@ne
+}
+{
+    \endalign
+    \ignorespacesafterend
+}
+\newcommand{\eliminationstep}[4]
+{
+    \ifnum\value{elimination@steps}>0\\\sim\quad\fi
+    \left(
+        \ifnum\elimination@num@rights>0
+            \begin{array}
+            {@{}*{\elimination@num@variables}{R{#1}}
+            |@{}*{\elimination@num@rights}{R{#2}}}
+        \else
+            \begin{array}
+            {@{}*{\elimination@num@variables}{R{\elimination@col@width}}}
+        \fi
+            #3
+        \end{array}
+    \right)
+    & \quad
+    \begin{array}{l}
+        #4
+    \end{array}
+    \addtocounter{elimination@steps}{1}
+}
+\makeatother
+
+
+%\usepackage{cancel}
+\usepackage{newtxtext,newtxmath}
+
+
+
+\title{Domácí úloha}
+
+\newcommand{\pageline}{\noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}\vspace{5pt}}
+\setlength{\parskip}{0.75em}
+
+
+
+\setlength\abovedisplayshortskip{10pt}
+\setlength\abovedisplayskip{10pt}
+\setlength\belowdisplayshortskip{10pt}
+\setlength\belowdisplayskip{10pt}
+
+%===============================================================================
+\graphicspath{{fig/}}
+
+%pagestyle settings
+\usepackage{fancyhdr}
+\usepackage[export]{adjustbox}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{Brno, 10. prosince 2019}
+\lhead{Lineární algebra}
+\lfoot{2. skupina}
+\rhead{Domácí úloha}
+
+\cfoot{\thepage}
+
+% hlavička 
+
+\title{\includegraphics[scale=0.1,keepaspectratio]{fig/logo_cz.png}\\ \huge{Lineární algebra} \\ 2019/2020}
+\date{}
+
+
+\begin{document}
+	\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+    \huge Domácí úloha
+\end{center}
+\begin{center}
+    \huge \text{2. skupina}
+\end{center}
+\begin{center}
+David Mihola  |  xmihol00 \\
+Ondřej Ondryáš  |  xondry02 \\
+David Chocholatý  |  xchoch08 \\
+František Nečas  |  xnecas27 \\
+Lukáš Foltyn  |  xfolty17
+\end{center}
+
+
+
+
+
+
+
+
+\newpage
+\section*{Příklad 1}
+
+Na množině reálných čísel řešte soustavu rovnic s parametrem $a$.
+
+\[
+\systeme[xyz]{
+ax + y + z = 1-a,
+x + ay + z = 0,
+x + y + az = 0
+}
+\] 
+\pageline \newline
+Soustavu rovnic upravíme pomocí Gaussovy eliminace.
+
+\begin{elimination}[3]{3}{1.1}
+    \eliminationstep{1.5em}{3em}
+    {
+        a & 1 & 1 & 1 - a \\
+        1 & a & 1 & 0 \\
+        1 & 1 & a & 0
+    }
+    {
+        \\
+        \\
+    }
+    \eliminationstep{3em}{3em}
+    {
+        1 & 1 & a & 0 \\
+        0 & a-1 & 1-a & 0 \\
+        0 & 1-a & 1-a^2 & 1-a
+    }
+    {
+        III\\
+        II - III\\
+        I - aIII
+    }
+    \eliminationstep{4.1em}{3em}
+    {
+        1 & 1 & a & 0 \\
+        0 & a-1 & 1-a & 0 \\
+        0 & 0 & a^2+a - 2 & a - 1
+    }
+    {
+        I\\
+        II\\
+        -III - II
+    }
+\end{elimination}
+
+Eliminovanou soustavu vyřešíme.
+
+\begin{align*}
+    (a^2 + a - 2)z = a - 1 \\
+    z = \frac{a-1}{(a+2)(a-1)} = \frac{1}{a+2} \tag*{pro $a \notin  \{1, -2\}$}\\
+\end{align*}
+\begin{align*}
+    (a-1)y + \frac{1-a}{a+2} = 0\\
+    y = -\frac{1-a}{(a+2)(a-1)} = \frac{1}{a+2} \tag*{pro $a \neq -2$}
+\end{align*}
+\begin{align*}
+    x + \frac{1}{a+2} + \frac{a}{a+2} = 0\\
+    x = -\frac{a+1}{a+2}
+\end{align*}
+\newpage
+Dále vyřešíme případy, ve kterých výsledek nelze kvůli dělení nulou spočítat obecně pomocí eliminace, tedy $a = 1$ a $a = -2$.
+
+Pro $a = 1$
+
+\begin{align*}
+    (1^{2} + 1 - 2)z &= 1 - 1\\
+    0z &= 0 \\
+    z &= t \tag*{$t \in \mathbb{R}$}
+\end{align*}
+\begin{align*}
+    0y + 0z &= 0 \\
+    y &= s \tag*{$s \in \mathbb{R}$}
+\end{align*}
+\begin{align*}
+    x + y + z = 0\\
+    x = -t -s
+\end{align*}
+
+Pro $a = -2$
+
+\begin{align*}
+    (4 - 2 -2)z &= -3\\
+    0z &= -3 \\
+    0 &\neq -3
+\end{align*}
+
+Pro $a = -2$ neexistuje žádné řešení.
+
+Výsledky můžeme shrnout následovně:
+\begin{center}
+    \begin{tabular}{c|c}
+        $a$ & $\{[x, y, z]\}$\\
+        \hline
+        $-2$ & $\emptyset$ \\
+        $1$ & $\{[-t -s, s, t]| t, s \in \mathbb{R}\}$\\
+        $\mathbb{R} \setminus \{1, -2\}$ & $\{[\frac{a+1}{a+2}, \frac{1}{a+2}, \frac{1}{a+2}]\}$
+    \end{tabular}
+\end{center}
+
+
+
+%===============================================================================
+
+\newpage
+
+\section*{Příklad 2}
+
+Určete jenom na základě vlastností determinantů:
+\begin{center}
+$
+\begin{vmatrix}
+    z & u & v \\
+    v + u & v + z & z + u \\
+    1 & 1 & 1
+\end{vmatrix}
+$
+\end{center}
+
+\pageline
+
+Můžeme využívat pouze operací vycházejících z vlastností determinantu, jako jsou operace sčítání a odčítání řádků či sloupců, prohození řádků se změnou znaménka determinantu, násobení konstantou apod.
+\begin{enumerate}
+    \item Nejprve odečteme druhý sloupec od prvního i třetího sloupce,
+    \item první řádek přičteme k druhému řádku,
+    \item odečteme $(u + v + z)$-násobek třetího řádku od druhého. Tuto operaci můžeme klidně provést, neboť víme, že ať bude součet $(u + v + z)$ jakýkoliv, nedojde ke změně výsledného determinantu, protože:
+    \begin{enumerate}
+        \item $(u + v + z) = 0$ ... v determinantu se vyskytuje nulový řádek – determinant je roven 0,
+        \item $(u + v + z) \neq 0$ ... provedeme operaci a opět vznikne stejný nulový řádek – determinant je roven 0.
+    \end{enumerate}
+\end{enumerate}
+$$
+\begin{gmatrix}[v]
+    z & u & v \\
+    v + u & v + z & z + u \\
+    1 & 1 & 1
+\colops
+\add[-1]{1}{2}
+\add[-1]{1}{0}
+\end{gmatrix}
+=
+\begin{gmatrix}[v]
+    z - u & u & v - u \\
+    u - z & v + z & u - v \\
+    0 & 1 & 0
+\rowops
+\add[]{0}{1}
+\end{gmatrix}
+=
+\begin{gmatrix}[v]
+    z - u & u & v - u \\
+    0 & u + v + z & 0 \\
+    0 & 1 & 0
+\rowops
+\add[-(u + v +z)]{2}{1}
+\end{gmatrix}
+=
+$$
+$$
+=
+\begin{gmatrix}[v]
+    z - u & u & v - u \\
+    0 & 0 & 0 \\
+    0 & 1 & 0
+\end{gmatrix}
+$$
+
+
+\begin{comment} PUVODNI PODOBA
+$$
+\begin{vmatrix}
+    z & u & v \\
+    v + u & v + z & z + u \\
+    1 & 1 & 1
+\end{vmatrix}
+=
+\begin{vmatrix}
+    z - u & u & v - u \\
+    u - z & v + z & u - v \\
+    0 & 1 & 0
+\end{vmatrix}
+=
+\begin{vmatrix}
+    z - u & u & v - u \\
+    0 & u + v + z & 0 \\
+    0 & 1 & 0
+\end{vmatrix}
+=
+\begin{vmatrix}
+    z - u & u & v - u \\
+    0 & 0 & 0 \\
+    0 & 1 & 0
+\end{vmatrix}
+$$
+\end{comment}
+
+Druhý řádek determinantu je nulový. Můžeme s jistotou tvrdit, že ať zvolíme libovolná $x, y, z$, výsledek determinantu bude vždy roven nule.
+
+%===============================================================================
+
+\newpage
+
+\section*{Příklad 3}
+Nechť $M = {[a, b] \in \mathbb{R}^2; 3\text{ }|\text{ }(a + 2b)}$. Zjistěte, jestli $M$ je podprostor $V_2(\mathbb{R})$. Svou odpověď zdůvodněte.
+\pageline
+
+\begin{enumerate}
+    \item Podprostor $M$ nesmí být prázdný. Ověříme, že $M \neq \emptyset$.
+    V $M$ se tedy musí nacházet minimálně $\overline{0}$. V tom případě by platilo následující:
+    $$[a, b] = [0, 0] \Rightarrow 3\text{ }|\text{ }(0 + 2 \cdot 0) \equiv 3\text{ }|\text{ }0$$ Platí. $\overline{0} \in M$. $M$ není prázdný.
+    
+    \item Náleží-li $M$ dva vektory $\overline{u}$ a $\overline{v}$, musí $M$ náležet i jejich součet.
+    \begin{align*}
+        &\overline{u}, \overline{v} \in M \Rightarrow \overline{u} + \overline{v} \in M \\
+        \overline{u} = [u_1; u_2] \text{ a } \overline{v} = [v_1; v_2] \text{ a jistě víme, že: } \\
+        &3\text{ }|\text{ } (u_1 + 2u_2) \text{ a } 3 \text{ }|\text{ } (v_1 + 2v_2) \\
+        \text{Součet vektorů je roven:} \\
+        &\vec{u} + \vec{v} = [u_1 + v_1; u_2 + v_2] \\
+        \text{Aby } \vec{u} + \vec{v} \text{ bylo z } M \text{, muselo by platit: } \\
+        &3 \text{ }|\text{ } (u_1 + v_1) + 2(u_2 + v_2) \\
+        \text{A protože platí: } \\
+        &3 \text{ }|\text{ } (u_1 + 2u_2) +  (v_1 + 2v_2) \\
+        \text{Což můžeme upravit na: } \\
+        &3 \text{ }|\text{ } (u_1 + v_1) + 2(u_2 + v_2) \\
+        \text{Víme tedy, že: } \\ 
+        &\overline{u} + \overline{v} \in M\text{.}
+    \end{align*}
+    Platí.
+    
+    
+    
+    \item Jestliže $\overline{u}\in M$ a zároveň existuje $\alpha \in \mathbb{R}$, potom platí: $\alpha \cdot \overline{u} \in M$: 
+    \begin{align*}
+        &\alpha \cdot \overline{u} = [\alpha \cdot u_1; \alpha \cdot u_2] \\
+        &3 \text{ }|\text{ } \alpha \cdot u_1 + \alpha \cdot 2 \cdot u_2 \\
+        &3 \text{ }|\text{ } \alpha \cdot (u_1 + 2u_2) \\
+        &\text{Zvolíme-li ale například $\alpha = 0,5$ a $\vec{u} = [1; 1]$, dostaneme: } \\
+        &\alpha \cdot \overline{u} = [0,5; 0,5] \text{ ale } 3 \nmid (0,5 + 2 \cdot 0,5) 
+    \end{align*}
+    Neplatí. $\alpha \cdot \overline{u} \notin M \Rightarrow $ Nejedná se o podprostor $V_2(\mathbb{R})$.
+\end{enumerate}
+
+%===============================================================================
+
+\newpage
+\section*{Příklad 4}
+Vektorový podprostor $L \subseteq V_4(\mathbb{R})$ je generován vektory
+$$ \overline{a}_1 = [1, - 1, 2, - 2]\text{, }\overline{a}_2 = [1, 1, - 2, 3]\text{, }\overline{a}_3 = [- 1, - 1, 7, - 8]\text{.} $$
+
+Pomocí Gram-Schmidtova ortogonalizačního procesu najděte ortonormální bázi L.
+
+\pageline
+
+\begin{enumerate}
+    \item Začneme hledat ortogonální báze $\overline{b}_1$, $\overline{b}_2$ a $\overline{b}_3$ vektorů $\overline{a}_1$, $\overline{a}_2$ a $\overline{a}_3$:
+    \begin{align*}
+        &\overline{b}_1 = \overline{a}_1 = [1;-1;2;-2] \\
+        &\overline{b}_2 = \overline{a}_2 + \beta_{21} \cdot \overline{a}_1 \\
+        &\overline{b}_3 = \overline{a}_3 + \beta_{32} \cdot \overline{a}_2 + \beta_{31} \cdot \overline{a}_1 \\
+    \end{align*}
+\item Vypočteme a dosadíme $\beta_{21}$, $\beta_{32}$ a $\beta_{31}$ podle vzorečku:
+$$ \beta_{xy} = - \frac{\overline{a}_x \cdot \overline{b}_y}{\overline{b}_y \cdot \overline{b}_y} $$
+    \begin{align*}
+        &\beta_{21} = - \frac{\overline{a}_2 \cdot \overline{b}_1}{\overline{b}_1 \cdot \overline{b}_1} = - \frac{[1, 1, -2, 3] \cdot [1;-1;2;-2]}{[1;-1;2;-2] \cdot [1;-1;2;-2]} = \frac{10}{10} = 1  \\
+        &\overline{b}_2 = \overline{a}_2 + \beta_{21} \cdot \overline{a}_1 = [1, 1, - 2, 3] + 1 \cdot [1;-1;2;-2] = [2;0;0;1] \\
+        &\beta_{32} = - \frac{\overline{a}_3 \cdot \overline{b}_2}{\overline{b}_2 \cdot \overline{b}_2} = - \frac{[- 1, - 1, 7, - 8] \cdot [2;0;0;1]}{[2;0;0;1] \cdot [2;0;0;1]} = - \frac{30}{10} = - 3  \\
+        &\beta_{31} = - \frac{\overline{a}_3 \cdot \overline{b}_1}{\overline{b}_1 \cdot \overline{b}_1} = - \frac{[- 1, - 1, 7, - 8] \cdot [1;-1;2;-2]}{[1;-1;2;-2] \cdot [1;-1;2;-2]} = \frac{10}{5} = 2  \\
+        &\overline{b}_3 = \overline{a}_3 + \beta_{32} \cdot \overline{a}_2 + \beta_{31} \cdot \overline{a}_1  = [- 1, - 1, 7, - 8] - 3 \cdot [1, 1, - 2, 3] + 2 \cdot [1, - 1, 2, - 2] = [0;2;1;0]
+    \end{align*}
+    \item Ověříme správnost vypočítaných výsledků pomocí vlastností ortogonálních bází – jsou na sebe navzájem kolmé:
+    \begin{align*}
+        &\overline{b}_2 \perp \overline{b}_1 \Rightarrow \overline{b}_2 \cdot \overline{b}_1 = 0 \Leftrightarrow [2;0;0;1] \cdot [1;-1;2;-2] = 0 \text{ ... platí} \\
+        &\overline{b}_3 \perp \overline{b}_2 \Rightarrow \overline{b}_3 \cdot \overline{b}_2 = 0 \Leftrightarrow [0;2;1;0] \cdot [2;0;0;1] = 0 \text{ ... platí} \\
+        &\overline{b}_3 \perp \overline{b}_1 \Rightarrow \overline{b}_3 \cdot \overline{b}_1 = 0 \Leftrightarrow [0;2;1;0] \cdot [1;-1;2;-2] = 0 \text{ ... platí}
+    \end{align*}
+    \newpage
+    \item Dopočítáme ortonormální báze podle vzorečku:
+    $$ \overline{h}_x = \frac{\overline{b}_x}{||\overline{b}_x||} $$
+    
+    \begin{align*}
+        &\overline{h}_1 = \frac{\overline{b}_1}{||\overline{b}_1||} = \frac{[1;-1;2;-2]}{\sqrt{1^2 + (-1)^2 + 2^2 + (-2)^2}} = \frac{[1;-1;2;-2]}{\sqrt{10}} = \left[\displaystyle \frac{\sqrt{10}}{10}; - \frac{\sqrt{10}}{10}; \frac{\sqrt{10}}{5}; - \frac{\sqrt{10}}{5} \right ] \\
+        &\overline{h}_2 = \frac{\overline{b}_2}{||\overline{b}_2||} = \frac{[2;0;0;1]}{\sqrt{2^2 + 0^2 + 0^2 + 1^2}} = \frac{[1;-1;2;-2]}{\sqrt{5}} = \left[\displaystyle \frac{2\sqrt{5}}{5}; 0; 0; \frac{\sqrt{5}}{5} \right ] \\
+        &\overline{h}_3 = \frac{\overline{b}_3}{||\overline{b}_3||} = \frac{[0;2;1;0]}{\sqrt{0^2 + 2^2 + 1^2 + 0^2}} = \frac{[1;-1;2;-2]}{\sqrt{5}} = \left[\displaystyle 0; \frac{2\sqrt{5}}{5}; \frac{\sqrt{5}}{5}; 0 \right ] \\
+    \end{align*}
+    \item Opět můžeme ověřit správnost vypočítaných výsledků pomocí vlastností ortonormálních bází – jsou na sebe navzájem kolmé:
+    \begin{align*}
+        &\overline{h}_2 \perp \overline{h}_1 \Rightarrow \overline{h}_2 \cdot \overline{h}_1 = 0 \Leftrightarrow \left[\displaystyle \frac{2\sqrt{5}}{5}; 0; 0; \frac{\sqrt{5}}{5} \right ] \cdot \left[\displaystyle \frac{\sqrt{10}}{10}; - \frac{\sqrt{10}}{10}; \frac{\sqrt{10}}{5}; - \frac{\sqrt{10}}{5} \right ] = 0 \text{ ... platí} \\
+        &\overline{h}_3 \perp \overline{h}_2 \Rightarrow \overline{h}_3 \cdot \overline{h}_2 = 0 \Leftrightarrow \left[\displaystyle 0; \frac{2\sqrt{5}}{5}; \frac{\sqrt{5}}{5}; 0 \right ] \cdot \left[\displaystyle \frac{2\sqrt{5}}{5}; 0; 0; \frac{\sqrt{5}}{5} \right ] = 0 \text{ ... platí} \\
+        &\overline{h}_3 \perp \overline{h}_1 \Rightarrow \overline{h}_3 \cdot \overline{h}_1 = 0 \Leftrightarrow \left[\displaystyle 0; \frac{2\sqrt{5}}{5}; \frac{\sqrt{5}}{5}; 0 \right ] \cdot \left[\displaystyle \frac{\sqrt{10}}{10}; - \frac{\sqrt{10}}{10}; \frac{\sqrt{10}}{5}; - \frac{\sqrt{10}}{5} \right ] = 0 \text{ ... platí}
+    \end{align*}
+    
+    Nalezli jsme ortonormální báze podprostoru $L$.
+\end{enumerate}
+
+
+%===============================================================================
+
+\newpage
+\section*{Příklad 5}
+
+
+
+
+
+Je dána soustava rovnic
+\[
+\systeme[xyz]
+{
+x - 3y + 100z = 123,
+200x - 3y + 2z = 765,
+x - 500y + 2z = 987
+}
+\] 
+
+Řešení soustavy najděte s přesností $\epsilon = 0.01$ Gauss-Seidelovou metodou, vyjděte z bodu $(3.5; -2; 1)$. Je-li to potřeba, soustavu nejprve upravte tak, aby byla zaručena konvergence.
+\newline \pageline
+
+
+Konvergenci zaručíme výměnou řádků matice tak, aby byla ostře řádkově dominantní:
+
+\[
+\begin{pmatrix} 
+    1 & -3 & 100\\
+    200 & -3 & 2\\
+    1 & -500 & 2
+\end{pmatrix} \cdot
+\begin{pmatrix} 
+    x\\
+    y\\
+    z
+\end{pmatrix} 
+=
+\begin{pmatrix} 123\\765\\987 \end{pmatrix} 
+\]
+
+\[
+\begin{pmatrix} 
+    200 & -3 & 2\\
+    1 & -500 & 2\\
+    1 & -3 & 100
+\end{pmatrix}
+\begin{pmatrix} 
+    x\\
+    y\\
+    z
+\end{pmatrix} 
+=
+\begin{pmatrix} 765\\987\\123 \end{pmatrix} 
+\] 
+
+
+\begin{align*}
+    x_{k+1}&=\frac{765 + 3y_k - 2z_k}{200}\\
+    y_{k+1}&=\frac{987 - 1x_{k+1} - 2z_k}{-500}\\
+    z_{k+1}&=\frac{123 - 1x_{k+1} + 3y_{k+1}}{100}
+\end{align*}
+
+$$ x_0 = 3.5, y_0 = -2, z_0 = 1 $$
+
+\begin{align*}
+x_{1} &= \frac{765-3\cdot2-2\cdot1}{200} = 3{,}785 \tag*{$\Delta x = 0{,}285$}\\
+y_{1} &= \frac{987-1\cdot3{,}785-2\cdot1}{-500} = -1{,}96243 \tag*{$\Delta y = 0{,}03757$}\\
+z_{1} &= \frac{123-1\cdot3{,}785-3\cdot1{,}96243}{100} = 1{,}1332771 \tag*{$\Delta z = 0{,}1332771$}\\
+\\
+x_{2} &= \frac{765-3\cdot1{,}96243-2\cdot1{,}1332771}{200} = 3{,}784230779\,(\approx 3{,}7842) \tag*{$\Delta x \approx 0{,}00077$}\\
+y_{2} &= \frac{987-1\cdot3{,}784230779-2\cdot1{,}1332771}{-500} = -1{,}961898430042\,(\approx -1{,}9619) \tag*{$\Delta y \approx 0{,}00053$}\\
+z_{2} &= \frac{123-1\cdot3{,}784230779-3\cdot1{,}961898430042}{100} = 1{,}13330073930874\,(\approx 1{,}1333) \tag*{$\Delta z \approx 0{,}00002$}\\
+\end{align*}
+
+Řešení $[x_2, y_2, z_2]$ již splňuje zadanou podmínku $\epsilon = 0,01$.
+
+\newpage
+
+\lstset{language=[Sharp]C,
+showspaces=false,
+showtabs=false,
+breaklines=true,
+showstringspaces=false,
+breakatwhitespace=true,
+escapeinside={(*@}{@*)},
+commentstyle=\color{greencomments},
+keywordstyle=\color{bluekeywords}\bfseries,
+stringstyle=\color{redstrings},
+basicstyle=\ttfamily
+}
+
+\begin{lstlisting}
+static Vector GaussSeidel(Matrix system, Vector values, decimal accuracy = 0.01m, Vector startingValues = null,
+    int maxCycles = 128, char startChar = 'x')
+{
+    int a = values.Rows;
+    if (a != system.Rows) return null;
+
+    // TODO: convergence
+    int i = 0;
+
+    Vector temp = startingValues ?? new Vector(system.Columns);
+    if (temp.Rows != system.Columns) return null;
+    
+    while (i < maxCycles)
+    {
+        Vector prev = new Vector(temp);
+        bool accurateEnough = true;
+
+        for (int v = 0; v < temp.Rows; v++)
+        {
+            temp[v] = values[v];
+            var line = "";
+            
+            line += $"{(char) (startChar + v)}_{{{i + 1}}} &= \\frac{{{temp[v]}";
+            
+            for (int c = 0; c < system.Columns; c++)
+            {
+                if (c == v) continue;
+                var val = system[v, c] * temp[c];
+                temp[v] -= val;
+                
+                line += $"{(val > 0 ? "-" : "+")}{Math.Abs(system[v, c])}\\cdot{Math.Abs(temp[c])}";
+            }
+
+            temp[v] /= system[v, v];
+
+            line +=
+                $"}}{{{system[v, v]}}} = {temp[v]} \\tag*{{$\\Delta {(char) (startChar + v)} = {Math.Abs(prev[v] - temp[v])}$}}\\\\\n";
+            
+            if(v == temp.Rows - 1) line += "\\\\\n";
+            Console.Write(line.Replace(".", "{,}"));
+
+            if (Math.Abs(prev[v] - temp[v]) > accuracy)
+            {
+                accurateEnough = false;
+            }
+        }
+
+        if (accurateEnough) break;
+        i++;
+    }
+
+    if (i == maxCycles) return null;
+    return temp;
+}
+\end{lstlisting}
+
+\end{document}

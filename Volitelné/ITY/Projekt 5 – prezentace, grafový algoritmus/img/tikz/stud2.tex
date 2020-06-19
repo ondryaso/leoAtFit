@@ -1,0 +1,65 @@
+\resizebox{0.7\textwidth}{!}{
+\begin{tikzpicture}
+\tikzset{st/.style={draw=orange, minimum size=0.8cm}}
+\tikzset{pth/.style={draw=red, minimum size=0.8cm}}
+
+\begin{scope}[every node/.style={circle,thick,draw}]
+\node [st] (M) at (7.3,10.0) {$0_{M}$};
+\node [st] (V) at (1.4,0.2) {$17.3_{V}$};
+\node [pth] (1) at (4.3,9.4) {$1_{1}$};
+\node (2) at (6.6,8.1) {$7_{2}$};
+\node (3) at (9.4,8.2) {$5_{3}$};
+\node [pth] (4) at (4.6,7.2) {$2_{4}$};
+\node (5) at (7.6,6.6) {$5_{5}$};
+\node [pth] (6) at (2.6,6.0) {$5_{6}$};
+\node [pth] (7) at (6.0,5.6) {$7_{7}$};
+\node (8) at (10.0,5.9) {$8_{8}$};
+\node [pth] (9) at (8.4,4.5) {$8.3_{9}$};
+\node (10) at (4.2,4.3) {$17.3_{10}$};
+\node [pth] (11) at (6.5,3.6) {$9.3_{11}$};
+\node (12) at (10.0,3.3) {$10.3_{12}$};
+\node [pth] (13) at (7.9,2.1) {$10.3_{13}$};
+\node (14) at (9.9,0.8) {$11.3_{14}$};
+\node [pth] (15) at (4.9,2.2) {$12.1_{15}$};
+\node [pth] (16) at (6.9,0.3) {$13.6_{16}$};
+\node (17) at (1.8,3.9) {$13.1_{17}$};
+\node [pth] (18) at (4.2,0.0) {$16.1_{18}$};
+\node (19) at (2.8,2.0) {$14.8_{19}$};
+\node (20) at (0.0,2.4) {$15.8_{20}$};
+\end{scope}
+\begin{scope}[>={Stealth[black]},every node/.style={fill=white,circle,scale=0.8},every edge/.style={draw=black,very thick}]
+\path (M) edge[red] node {$1$} (1);
+\path (M) edge node {$5$} (3);
+\path (1) edge node {$6$} (2);
+\path (2) edge node {$1$} (3);
+\path (1) edge[red] node {$1$} (4);
+\path (4) edge node {$3$} (5);
+\path (3) edge node {$1$} (5);
+\path (4) edge[red] node {$3$} (6);
+\path (5) edge node {$6$} (8);
+\path (6) edge[red] node {$2$} (7);
+\path (7) edge node {$1$} (8);
+\path (7) edge[red] node {$1.3$} (9);
+\path (8) edge node {$1.1$} (9);
+\path (8) edge node {$3.5$} (12);
+\path (11) edge node {$1$} (12);
+\path (10) edge node {$8$} (11);
+\path (9) edge[red] node {$1$} (11);
+\path (11) edge[red] node {$1$} (13);
+\path (13) edge node {$1.2$} (14);
+\path (12) edge node {$1$} (14);
+\path (14) edge node {$4$} (16);
+\path (13) edge[red] node {$1.8$} (15);
+\path (15) edge[red] node {$1.5$} (16);
+\path (15) edge node {$1$} (17);
+\path (10) edge node {$12$} (17);
+\path (16) edge[red] node {$2.5$} (18);
+\path (17) edge node {$1.7$} (19);
+\path (18) edge node {$2$} (19);
+\path (19) edge node {$1$} (20);
+\path (18) edge[red] node {$1.2$} (V);
+\path (20) edge node {$4$} (V);
+\end{scope}
+
+\end{tikzpicture}
+}

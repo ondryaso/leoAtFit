@@ -1,0 +1,71 @@
+% ITY – projekt 4
+% Ondřej Ondryáš (xondry02), FIT VUT
+% Datum: 11. 4. 2020
+% Poznámky: - K vygenerování citací byl použit balík biblatex s biber backendem a stylem iso-numeric,
+%             který by měl odpovídat ISO 690 (https://github.com/michal-h21/biblatex-iso690) – byla
+%             o něm zmínka v prezentaci. Tento styl vygeneruje s aktuální verzí biblatexu dvě varování
+%             kvůli způsobu, jakým nakládá se jmény, na jeho funkčnosti a praktické správnosti to ale nic nemění.
+%           - pdfTeX generuje při překladu poněkud kryptickou chybu „destination with the same identifier 
+%             (name{page.1}) has been already used“. Pravděpodobně jde o kolizi balíku hyperref s _něčím_,
+%             žádný skutečný dopad tohoto varování jsem neobjevil.
+
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[a4paper, top=2cm, left=2cm, right=2cm, bottom=2cm]{geometry}
+\usepackage[english, czech]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+
+\usepackage[unicode,pdfauthor={Ondřej Ondryáš (xondry02)},pdftitle={Typografie a publikování, 4. projekt: Citování v LaTeXu},hidelinks]{hyperref}
+
+\usepackage[backend=biber,style=iso-numeric,autolang=other,sortlocale=cs_CZ,bibencoding=UTF8,block=ragged]{biblatex}
+\addbibresource{sources.bib}
+
+\usepackage[indent]{parskip}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\Huge\textsc{Vysoké učení technické v~Brně}\\\huge\textsc{Fakulta informačních technologií}\\
+\vspace{\stretch{0.382}}
+\LARGE
+Typografie a publikování\,--\,4. projekt\\
+\Huge
+Citování v~\LaTeX u\\
+\vspace{\stretch{0.618}}
+\end{center}
+{\Large \today \hfill Ondřej Ondryáš (xondry02)}
+\end{titlepage}
+
+\section{Citování}
+Citování je stěžejní součástí tvorby a publikace (nejen) odborných textů. Podstatou citování je způsob, jakým se ve vlastních publikacích přejímají myšlenky z~jiných dokumentů, respektive jakým se na myšlenky z~jiných dokumentů ukazuje. Termín \emph{citace} se v~praxi používá v~několika různých významech: Podle ASCS termín \emph{citace} znamená „doslovné uvedení něj. výroku; výrok, text sám“ -- to je běžně označováno jako \emph{přímá citace} -- či „uvedení názvu díla a zprav. i místa v~něm, citování“ \cite{ascs}. Jako \emph{citace} se tak běžně označují také samotné bibliografické záznamy (údaje o~dokumentu, ze kterého je čerpáno) nebo samotné odkazy na jiné dokumenty \cite{ktd_citace}.
+
+Primárním cílem citování je uvádění zdrojů, ze kterých práce čerpá, čímž se její autor snaží podložit tvrzení, která v~práci prezentuje. Zároveň tím do jisté míry odlišuje vlastní myšlenky, které pro práci vytvořil, a myšlenky přejaté, které v~práci pouze využívá. Pokud by takové myšlenky ocitovány nebyly, autor by je vydával za vlastní a kromě veřejné prezentace vlastního morálního úpadku by tak porušoval autorský zákon. 
+
+V~akademické sféře se často podle počtu referencí (odkazů) na články v~dané publikaci (sborníku, časopisu) hodnotí úroveň této publikace. Způsob, jakým toto hodnocení probíhá, a jeho skutečná výpovědní hodnota je však předmětem diskuzí a značných neshod: není zcela neobvyklé, že se univerzity a podobné instituce snaží různými metodami zvyšovat počet referencí na své publikace, a tím si „uměle“ zvyšovat svůj \emph{ranking}, hodnocení, což v~důsledku vede k~deformaci hodnocení vědeckých výsledků (více k~této problematice např. v~\cite{reedijk_citations_ethics}).
+
+\section{Citování v \LaTeX u}
+Sázecí systém \LaTeX\ je \emph{de facto} standardem pro sazbu dokumentů v~akademickém prostředí \cite{dongen_latex, knauff_latex_ef}. Citování se pravidelně objevuje jako téma například na konferencích \textsc{TUGboat} skupiny TeX Users Group \cite[např.][]{tugboat_29,tugboat_30,tugboat_32}. \LaTeX\ samotný ovšem obsahuje pouze základní nástroje pro práci s~citacemi: prostředí \verb|thebibliography| a příkaz \verb|\cite{}|. Je tedy přirozené, že v~rámci jeho „ekosystému“ vzniklo několik komplexnějších řešení pro citování a generování bibliografie.
+
+\subsection{\textsc{Bib}\TeX}
+Prvním a značně klasickým řešením je program \textsc{Bib}\TeX. Jeho primárním vstupem je bibliografická databáze (obvykle s~příponou \verb|.bib|), ve které uživatel specifikuje citované zdroje pomocí sady textových direktiv. Formát tohoto souboru je vcelku jednoduchý (příklady viz \cite[kap.~8]{markey_bibtex}) a existují nástroje, které jej generují i z~jiných formátů, například XML \cite{mazac_xml}. Dalším vstupem je pak soubor s~citačním stylem, který je na jednotlivé zdroje aplikován. Produktem této operace je v~podstatě sada příkazů pro prostředí \verb|thebibliography|, které se při dalším průchodu kompilátoru \LaTeX u vloží na určené místo.
+
+Je nutné zdůraznit, že \textsc{Bib}\TeX\ samotný je externí program a sestavování dokumentu, který jej využívá, vyžaduje tři průchody \LaTeX u. Po prvním spuštění programu \verb|latex| (resp. \verb|pdflatex| či jiné) je vygenerován \verb|.aux| soubor, který obsahuje informace o~citovaných značkách. Poté je spuštěn \verb|biblatex|, který načte tento soubor, přečte databázi \verb|.bib| a určený soubor se stylem \verb|.bst| a vygeneruje soubor \verb|.bbl|. Poté je znovu spuštěn \verb|latex|, který načte soubor \verb|.bbl|, který obsahuje vygenerované citace. Reference na ně ovšem vygeneruje až při opětovném spuštění. \cite[kap.~5]{markey_bibtex}
+
+\textsc{Bib}\TeX\ je díky svému konceptu citačních stylů relativně flexibilním řešením. V~základu například není dostupný styl citací, který by odpovídal české normě ČSN ISO 690, přesto je ale možné správně česky citovat díky stylu \verb|czplain|, který vznikl v~rámci bakalářské práce na Fakultě informačních technologií VUT v~Brně (viz \cite{pysny_czplain}), nebo pomocí stylu \verb|czechiso| (podle autora „neodpovídá normě přesně“ \cite{martinek_czechiso}, otázkou však zůstává, co to přesně znamená, protože norma přesně formát citace nespecifikuje).
+
+Zejména kvůli svému stáří (první vydání aktuální verze, 0.99, proběhlo v~roce 1988, od té doby se objevilo pouze několik bugfixů \cite{patashnik_bibtex}) se ale potýká s~několika problémy. Významným je například absence podpory kódování UTF-8. Obtížné je taky generování několika oddělených bibliografií, které vyžaduje použití externího balíku a rozdělení zdrojového textu na samostatné soubory \cite{datta_latex}.
+
+\subsection{\textsc{Bib}\LaTeX}
+Balík \verb|biblatex| je kompletní reimplementací bibliografických nástrojů \LaTeX u. Kromě plné podpory Unicode nabízí pokročilé možnosti konfigurace, poskytuje možnost generování různých bibliografií, je navržen pro práci s~více jazyky, obsahuje definice pro více druhů citovaných zdrojů a další \cite[kap.~1]{kime_biblatex}. Také jednoduše umožňuje vytvářet seznamy bibliografie na koncích kapitol \cite[kap.~1.7.3]{dongen_latex}, čehož se využívá například v~dokumentech, které se skládají z~několika jen velmi volně navazujících částí. Obsahuje také značné množství citačních stylů (viz \cite[kap.~3.3]{kime_biblatex}), přičemž je stále jednoduché vytvořit a použít styl vlastní\footnote{Tento dokument používá citační styl \texttt{iso-numeric} z~balíku \texttt{biblatex-iso690}, který přidává podporu pro českou normu ISO 690. Více informací na \url{https://github.com/michal-h21/biblatex-iso690}.}.
+
+Formát bibliografické databáze \textsc{Bib}\LaTeX u vychází z~formátu \textsc{Bib}\TeX u, je tak do značné míry zpětně kompatibilní a přechod na nové řešení není náročný. \textsc{Bib}\LaTeX\ používá jiný způsob generování vstupních dat pro kompilátor \LaTeX u. Při prvním volání \verb|latex| vygeneruje balík pomocný soubor \verb|.bcf|. Poté je spuštěn nástroj \verb|biber|, který tento soubor zpracuje spolu s~databází \verb|.bib| a vygeneruje soubor \verb|.bbl|. Poté stačí \verb|latex| spustit pouze jednou, balík \verb|biblatex| načte vygenerovaný soubor \verb|.bbl| a v~textu vytvoří všechny citace i odkazy na ně. Takto popisuje zpracování dokumentace balíku \verb|biblatex| \cite[kap.~3.13.1]{kime_biblatex}, v praxi se ovšem ukázalo, že po druhém průchodu programem \verb|latex| bylo ve výstupu uvedeno: „\texttt{LaTeX Warning: There were undefined references. Package biblatex Warning: Please rerun LaTeX.}“ Důvod tohoto chování není autorovi znám. Všechny odkazy v tomto dokumentu byly i tak správně vyplněné a funkční, spustit třetí průchod \verb|latex| ale nic nezkazí a zaručí skutečně správné vyvedení všech odkazů.
+
+\clearpage
+\section*{Reference}
+\printbibliography[heading=none]
+
+\end{document}

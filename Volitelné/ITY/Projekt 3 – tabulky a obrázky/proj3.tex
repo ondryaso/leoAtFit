@@ -1,0 +1,307 @@
+% ITY – projekt 3
+% Ondřej Ondryáš (xondry02), FIT VUT
+% Datum: 30. 3. 2020
+% Poznámky: Strom v posledním obrázku byl vygenerován v rychlosti splácanou utilitou,
+%           která pro vstupní čáry hledá nejbližší směrový vektor podporovaný prostředím
+%           picture. Je zřejmé, že to není příliš dotažené řešení, domnívám se ale, že
+%           v konečném důsledku tento strom i tak skvěle doplňuje celkový estetický dojem
+%           obrázku.
+%         – Aby klikatelné odkazy v PDF ukazovaly na horní stranu obrázků/tabulek, byl
+%           použit balík caption. Kvůli tomu ale musí být label algoritmu uvnitř caption
+%           algoritmu a odkaz tak ukazuje na konec algoritmu. Obrázků a tabulek je ale
+%           v dokumentu více, beru to proto jako vhodný ústupek.
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage{times}
+\usepackage[a4paper, top=3cm, left=2cm, textwidth=17cm, textheight=24cm]{geometry}
+\usepackage[czech]{babel}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage[ruled, czech, longend]{algorithm2e}
+\usepackage{graphicx}
+\usepackage{picture}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage[hypcap=true]{caption}
+%\usepackage{microtype}
+
+\usepackage[dvips, pdfauthor={Ondřej Ondryáš (xondry02)},
+            pdftitle={Typografie a publikování, 3. projekt: Tabulky a obrázky},
+            hidelinks,unicode]{hyperref}
+
+\urlstyle{same}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\Huge\textsc{Vysoké učení technické v~Brně}\\\huge\textsc{Fakulta informačních technologií}\\
+\vspace{\stretch{0.382}}
+\LARGE
+Typografie a publikování\,--\,3. projekt\\
+\Huge
+Tabulky a obrázky\\
+\vspace{\stretch{0.618}}
+\end{center}
+{\Large 30. března 2020 \hfill Ondřej Ondryáš (xondry02)}
+\end{titlepage}
+
+\section{Úvodní strana}
+Název práce umístěte do zlatého řezu a nezapomeňte uvést dnešní datum a vaše jméno a příjmení.
+
+\section{Tabulky}
+Pro sázení tabulek můžeme použít buď prostředí\verb| tabbing |nebo prostředí\verb| tabular|.
+
+\subsection{Prostředí\texttt{ tabbing}}
+Při použití\verb| tabbing |vypadá tabulka následovně:
+
+\begin{tabbing}
+Vodní melouny\quad\= 35,--\qquad \= 1 kus \kill
+\textbf{Ovoce} \> \textbf{Cena} \> \textbf{Množství} \\
+Jablka \> 25,90 \> 3 kg \\
+Hrušky \> 27,40 \> 2,5 kg \\
+Vodní melouny \> 35,-- \> 1 kus \\
+\end{tabbing}
+
+\noindent Toto prostředí se dá také použít pro sázení algoritmů, ovšem vhodnější je použít prostředí\texttt{ algorithm }nebo \texttt{algorithm2e }(viz sekce \ref{sec:algoritmy}).
+
+\subsection{Prostředí\texttt{ tabular}}
+Další možností, jak vytvořit tabulku, je použít prostředí\texttt{ tabular}. Tabulky pak budou vypadat takto\footnote{Kdyby byl problem s\texttt{ cline,} zkuste se podívat třeba sem: \url{http://www.abclinuxu.cz/tex/poradna/show/325037}.}:
+\\\setlength\arrayrulewidth{0.5pt}
+\begin{table}[hb]
+    \catcode`\-=12
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+         & \multicolumn{2}{c|}{\textbf{Cena}} \\\cline{2-3}
+        \textbf{Měna} & \textbf{nákup}  & \textbf{prodej} \\\hline
+        EUR  & 25,475 & 27,045 \\
+        GBP  & 28,835 & 30,705 \\
+        USD  & 22,943 & 24,357 \\\hline
+    \end{tabular}
+    \caption{Tabulka kurzů k dnešnímu dni}
+    \label{tab:kurzy_men}
+\end{table}
+\\
+\begin{table}[hb]
+    \catcode`\-=12
+    \centering
+    \begin{tabular}{| >{\bfseries}c | c |}
+        \hline
+         $A$ & $\neg A$ \\\hline
+         P & N \\\hline
+         O & O \\\hline
+         X & X \\\hline
+         N & P \\\hline
+    \end{tabular}
+    \begin{tabular}{|c|>{\bfseries}c|c|c|c|c|}
+        \hline
+        \multicolumn{2}{|c|}{\multirow{2}{*}{$A \wedge B$}} & \multicolumn{4}{c|}{$B$} \\\cline{3-6}
+        \multicolumn{2}{|c|}{} & \textbf{P} & \textbf{O} & \textbf{X} & \textbf{N} \\\hline
+        \multirow{4}{*}{$A$} & P & P & O & X & N \\\cline{2-6}
+           & O & O & O & N & N \\\cline{2-6}
+           & X & X & N & X & N \\\cline{2-6}
+           & N & N & N & N & N \\\hline
+    \end{tabular}
+    \begin{tabular}{|c|>{\bfseries}c|c|c|c|c|}
+        \hline
+        \multicolumn{2}{|c|}{\multirow{2}{*}{$A \vee B$}} & \multicolumn{4}{c|}{$B$} \\\cline{3-6}
+        \multicolumn{2}{|c|}{} & \textbf{P} & \textbf{O} & \textbf{X} & \textbf{N} \\\hline
+        \multirow{4}{*}{$A$} & P & P & P & P & P \\\cline{2-6}
+           & O & P & O & P & O \\\cline{2-6}
+           & X & P & P & X & X \\\cline{2-6}
+           & N & P & O & X & N \\\hline
+    \end{tabular}
+    \begin{tabular}{|c|>{\bfseries}c|c|c|c|c|}
+        \hline
+        \multicolumn{2}{|c|}{\multirow{2}{*}{$A \rightarrow B$}} & \multicolumn{4}{c|}{$B$} \\\cline{3-6}
+        \multicolumn{2}{|c|}{} & \textbf{P} & \textbf{O} & \textbf{X} & \textbf{N} \\\hline
+        \multirow{4}{*}{$A$} & P & P & O & X & N \\\cline{2-6}
+           & O & P & O & P & O \\\cline{2-6}
+           & X & P & P & X & X \\\cline{2-6}
+           & N & P & P & P & P \\\hline
+    \end{tabular}
+    \caption{Protože Kleeneho trojhodnotová logika už je „zastaralá“, uvádíme si zde příklad čtyřhodnotové logiky}
+    \label{tab:logika}
+\end{table}\pagebreak
+
+\section{Algoritmy}
+\label{sec:algoritmy}
+Pokud budeme chtít vysázet algoritmus, můžeme použít prostředí\texttt{ algorithm\footnote{Pro nápovědu, jak zacházet s~prostředím\texttt{ algorithm,} můžeme zkusit tuhle stránku:\\ \url{http://ftp.cstug.cz/pub/tex/CTAN/macros/latex/contrib/algorithms/algorithms.pdf}.} }nebo\texttt{ algorithm2e\footnote{Pro\texttt{ algorithm2e }zase tuhle: \url{http://ftp.cstug.cz/pub/tex/CTAN/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf}.}}.
+Příklad použití prostředí\texttt{ algorithm2e }viz Algoritmus \ref{alg:fastslam}.
+\\
+\IncMargin{1.5em}
+\begin{algorithm}[ht] 
+    \SetAlCapNameSty{textsc}
+    
+    \DontPrintSemicolon
+    \SetAlgoNoLine
+    \LinesNumbered
+    \SetNlSty{textnormal}{}{:}
+    
+    \Indm
+    \KwIn{$(X_{t-1}, u_t, z_t)$}
+    \KwOut{$X_t$}
+    \Indp
+    
+    \BlankLine
+    $\overline{X_t} = X_t = 0$\;
+    \For{$k = 1$ to $M$}{
+    \Indpp
+        $x^{[k]}_t = $ \textit{sample\_motion\_model}$(u_t, x^{[k]}_{t-1})$\;
+        $\omega^{[k]}_t = $ \textit{measurement\_model}$(z_t, x^{[k]}_t, m_{t-1})$\;
+        $m^{[k]}_t = updated\_occupancy\_grid(z_t, x^{[k]}_t, m^{[k]}_{t-1})$\;
+        $\overline{X_t} = \overline{X_t} + \langle x_x^{[m]}, \omega_t^{[m]} \rangle $\;
+    \Indmm
+    }
+    \For {$k = 1$ to $M$}{
+        draw $i$ with probability $\approx \omega_t^{[i]}$\;
+        add $\langle x_x^{[k]}, m_t^{[k]} \rangle$ to $X_t$\;
+        }
+    \Return $X_t$
+    
+\caption{FastSLAM\label{alg:fastslam}}
+\end{algorithm}
+\DecMargin{1.5em}
+
+\section{Obrázky}
+Do našich článků můžeme samozřejmě vkládat obrázky. Pokud je obrázkem fotografie, můžeme klidně použít bitmapový soubor. Pokud by to ale mělo být nějaké schéma nebo něco podobného, je dobrým zvykem takovýto obrázek vytvořit vektorově.
+
+\begin{figure}[hb]
+    \centering
+    \includegraphics[width=4.25cm]{etiopan.eps}\hspace{-0.1cm}
+    \reflectbox{\includegraphics[width=4.25cm]{etiopan.eps}}
+    \caption{Malý Etiopánek a jeho bratříček}
+    \label{fig:etiopanci}
+\end{figure}
+
+Rozdíl mezi vektorovým \ldots
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=7.8cm]{oniisan.eps}
+    \caption{Vektorový obrázek}
+    \label{fig:vektorovy}
+\end{figure}
+\noindent \ldots a bitmapovým obrázkem
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8.7cm]{oniisan2.eps}
+    \caption{Bitmapový obrázek}
+    \label{fig:bitmapovy}
+\end{figure}
+\noindent se projeví například při zvětšení.
+
+Odkazy (nejen ty) na obrázky \ref{fig:etiopanci}, \ref{fig:vektorovy} a~\ref{fig:bitmapovy}, na tabulky \ref{tab:kurzy_men} a~\ref{tab:logika} a také na algoritmus \ref{alg:fastslam} jsou udělány pomocí křížových odkazů. Pak je ovšem potřeba zdrojový soubor přeložit dvakrát.
+
+Vektorové obrázky lze vytvořit i~přímo v~\LaTeX u, například pomocí prostředí\texttt{ picture.}
+
+\pagebreak
+\begin{landscape}
+\begin{figure}[H]
+    \centering
+    \setlength{\unitlength}{0.5cm}
+    \begin{picture}(17cm, 14cm)
+
+    \newsavebox{\window}
+    \savebox{\window}(6,2)[bl]{
+        \linethickness{0.1mm}
+        \multiput(0,0)(1,0){3}{\line(0,1){2}}
+        \linethickness{1mm}
+        \put(3,0){\line(0,1){2}}
+        \linethickness{0.1mm}
+        \multiput(4,0)(1,0){3}{\line(0,1){2}}
+        \put(0,0){\line(1,0){6}}
+        \put(0,2){\line(1,0){6}}
+    }
+    
+    \newsavebox{\windowbtm}
+    \savebox{\windowbtm}(3,1)[bl]{
+        \linethickness{0.25mm}
+        \multiput(0,0)(3,0){2}{\line(0,1){1}}
+        \put(0,1){\line(1,0){3}}
+        \linethickness{0.1mm}
+        \put(0,0.66){\line(1,0){3}}
+        \put(0,0.33){\line(1,0){3}}
+        \multiput(0.33,0)(0.33,0){8}{\line(0,1){1}}
+    }
+    
+    \linethickness{1.5mm}
+    \multiput(0,0)(0,26){2}{\line(1,0){33}}
+    \multiput(0,0)(33,0){2}{\line(0,1){26}}
+    
+    \multiput(0,-0.5)(0,4.5){5}{
+        \multiput(2,4)(8,0){2}{\usebox{\window}}
+        \multiput(17,4)(8,0){2}{\usebox{\window}}
+    }
+    
+    \multiput(2,0)(4,0){3}{\usebox{\windowbtm}}
+    \multiput(20,0)(4,0){3}{\usebox{\windowbtm}}
+    
+    \linethickness{1mm}
+    \put(14.5,3){\line(1,0){4}}
+    \linethickness{0.5mm}
+    \multiput(15,0)(3,0){2}{\line(0,1){3}}
+    
+    \linethickness{0.1mm}
+    \multiput(15.2,0)(2.6,0){2}{\line(0,1){2.8}}
+    \put(15.2, 2.8){\line(1,0){2.6}}
+    \linethickness{0.3mm}
+    \put(17.1, 1.5){\line(1,0){0.4}}
+ 
+    \put(19, 2){\framebox(1, 0.5)[c]{\tiny 28c}}
+ 
+    \qbezier[50](35,24)(36.5,26)(35,28)
+    \qbezier[100](35,24)(38,26)(35,28)
+    
+
+    \put(4.70,0.00){\line(0,1){3.55}}
+    \put(4.5,3.6){\line(-1,1){1.3}}
+    \put(3.23,4.93){\line(-5,1){1.85}}
+    \put(3.28,5.23){\line(-5,1){1.47}}
+    \put(4.37,4.32){\line(-6,5){1.09}}
+    \put(4.37,4.32){\line(-1,2){0.91}}
+    \put(3.45,6.35){\line(-1,4){0.28}}
+    \put(3.18,7.44){\line(-1,5){0.28}}
+    \put(3.84,6.32){\line(-2,5){0.94}}
+    \put(4.85,3.68){\line(-2,5){1.02}}
+    \put(4.85,3.68){\line(0,1){0.74}}
+    \put(4.95,4.42){\line(-2,5){0.97}}
+    \put(5.08,4.75){\line(-3,5){1.09}}
+    \put(5.21,4.19){\line(0,1){2.13}}
+    \put(5.23,6.32){\line(0,1){2.24}}
+    \put(5.54,6.15){\line(-1,6){0.41}}
+    \put(5.54,6.15){\line(1,4){0.74}}
+    \put(5.49,5.89){\line(1,4){0.79}}
+    \put(5.54,4.57){\line(0,1){1.32}}
+    \put(5.11,3.38){\line(1,3){0.43}}
+    \put(5.15,0.00){\line(0,1){3.39}}
+    \put(5.39,0.00){\line(-1,0){0.66}}
+    \put(5.49,4.88){\line(2,5){1.57}}
+    \put(6.71,7.87){\line(0,1){1.83}}
+    \put(6.78,8.94){\line(1,1){1.68}}
+    \put(5.23,8.23){\line(1,3){0.71}}
+    \put(5.08,7.37){\line(-1,4){0.53}}
+    \put(3.23,8.15){\line(0,1){3.03}}
+    \put(3.05,7.95){\line(-2,5){1.07}}
+    \put(3.07,7.65){\line(-5,4){2.08}}
+    \put(3.45,6.32){\line(-5,2){2.74}}
+    \put(0.89,7.32){\line(-3,5){0.89}}
+    \put(1.83,6.91){\line(-1,0){1.35}}
+    \put(1.75,5.59){\line(-5,4){1.17}}
+    \put(1.68,5.49){\line(-2,1){1.32}}
+    \put(1.37,5.28){\line(-3,1){1.17}}
+    \put(2.59,9.25){\line(-5,3){1.85}}
+    \put(3.25,9.83){\line(-1,2){0.91}}
+    \put(6.38,6.91){\line(0,1){1.40}}
+    \put(5.69,5.41){\line(3,1){2.11}}
+    
+    \end{picture}
+    \caption{Brněnská bytovka s bytem inzerovaným jako „s~výhledem na strom“}
+    \label{fig:barak}
+\end{figure}
+\end{landscape}
+
+\end{document}

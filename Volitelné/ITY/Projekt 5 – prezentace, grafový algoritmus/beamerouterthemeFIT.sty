@@ -1,0 +1,132 @@
+\ProvidesPackage{beamerouterthemeFIT}[2015/12/07]
+% Copyright 2007 by Zdenek Vasicek <vasicek AT fit.vutbr.cz>
+% Updated 2015 by Ales Smrcka <smrcka AT fit.vutbr.cz> wrt
+%   http://www.vutbr.cz/jvs
+
+
+\mode<presentation>
+
+\pgfdeclareimage[width=6cm,interpolate=true]{fitlogotext}{img/fitlogo1_cz}
+
+\ifbeamer@mylogo
+  \pgfdeclareimage[width=1.7cm,interpolate=true]{fitlogotext}{img/mylogo}
+\fi
+
+\ifbeamer@nologo
+  \titlegraphic{\pgfuseimage{fitlogotext}}
+\fi
+
+
+\setbeamercolor{section in head/foot}{parent=palette primary}
+\setbeamercolor{subsection in head/foot}{parent=palette secondary}
+
+\setbeamercolor{author in head/foot}{parent=section in head/foot}
+\setbeamercolor{title in head/foot}{parent=subsection in head/foot}
+
+\setbeamercolor{date in head/foot}{parent=palette tertiary}
+
+\usesectionheadtemplate
+  {\hfill\insertsectionhead}
+  {\hfill\color{fg!50!bg}\insertsectionhead}
+
+
+% Hlavicka
+\defbeamertemplate*{headline}{fit theme}{}
+
+% Paticka
+\defbeamertemplate*{footline}{fit theme}
+{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=.9\paperwidth,ht=2.5ex,dp=1.125ex,right,rightskip=1pt]{author in head/foot}%
+\usebeamerfont{title in head/foot}\insertshorttitle%
+{\usebeamercolor[fg]{footline right rule}\hskip10pt\raise-1pt\hbox{\vrule width.9pt height2.5ex}}%svisla cara
+ %   \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm ]{author in head/foot}%
+  \usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertpagenumber\,/\,\insertpresentationendpage\kern1em%
+    
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\setbeamercolor{frametitle}{parent=subsection in head/foot}
+\setbeamercolor{frametitle right}{parent=section in head/foot}
+
+%Stinovani titulku - prevzato
+\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+  color(0pt)=(frametitle.bg);
+  color(\paperwidth)=(frametitle right.bg)}
+
+%Titulek kazdeho frame
+\defbeamertemplate*{frametitle}{fit theme}
+{%
+  \nointerlineskip%
+  \vskip-2pt%
+  \hbox{\leavevmode%
+    \advance\beamer@leftmargin by -12bp%
+    \advance\beamer@rightmargin by -12bp%
+    \beamer@tempdim=\textwidth%
+    \advance\beamer@tempdim by \beamer@leftmargin%
+    \advance\beamer@tempdim by \beamer@rightmargin%
+    \hskip-\Gm@lmargin\hbox{%
+      \setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}%
+          \vbox{}\vskip-.4ex%
+          \leftskip0.3cm%
+          \rightskip0.3cm plus1fil\leavevmode\hskip5pt\insertframetitle%
+          \ifx\insertframesubtitle\@empty%
+            \strut\par%
+          \else
+            \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+          \fi%
+          \nointerlineskip
+          \vbox{}%
+          \end{minipage}}%
+      \beamer@tempdim=\ht\beamer@tempbox%
+      \advance\beamer@tempdim by 2pt%
+      \pgfdeclareimage[height=1.4ex,interpolate=true]{fitlogowhite}{img/fitlogo3}%
+%POZADI - obdelnik pod textem
+      \begin{pgfpicture}{0pt}{0pt}{\paperwidth}{\beamer@tempdim}
+        \usebeamercolor{frametitle right}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+        \pgfusepath{clip}
+        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+        %leva cara
+        \usebeamercolor[fg]{frametitle left rule}
+        \pgfpathrectangle{\pgfpoint{10pt}{.15\beamer@tempdim}}{\pgfpoint{.4mm}{.6\beamer@tempdim}}
+        \pgfusepath{fill}
+\ifbeamer@nologo%
+        %prava cara
+        \usebeamercolor[fg]{frametitle right rule}
+        \pgfpathrectangle{\pgfpoint{.9\paperwidth}{.15\beamer@tempdim}}{\pgfpoint{.4mm}{.6\beamer@tempdim}}
+        \pgfusepath{fill}
+        %logo vpravo
+        \pgf@xa=.9\paperwidth%
+        \advance\pgf@xa by 5pt%
+        \pgftext[at=\pgfpoint{\pgf@xa}{5pt},left,base]{\pgfuseimage{fitlogowhite}}
+\fi%
+        \pgfsetbaseline{0pt}
+      \end{pgfpicture}
+%TEXT - umisteny nad vykreslenym obdelnikem
+      \hskip-\paperwidth%
+      \box\beamer@tempbox%
+    }%
+    \hskip-\Gm@rmargin%
+  }%
+}
+
+
+\setbeamertemplate{navigation symbols}{}
+
+\defbeamertemplate*{sidebar right}{fit theme}
+{
+  \vfill%
+  %\llap{PIK\insertlogo\hskip0.1cm}%
+  %\vskip2pt%
+  \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+  \vskip2pt%
+} 
+
+\mode
+<all>

@@ -1,0 +1,53 @@
+\documentclass[twocolumn,10pt]{article}
+
+\usepackage[utf8]{inputenc}
+%\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, top=2cm, left=2cm, textwidth=17cm, textheight=23cm]{geometry}
+\usepackage[czech]{babel}
+\usepackage[hidelinks,unicode]{hyperref}
+
+% Použití balíku titling by bylo hezčí, ale vložení mezery tady postačí.
+\title{Typografie a publikování\,--\,1. projekt\vspace{.4em}}
+\author{Ondřej Ondryáš (\href{mailto:xondry02@stud.fit.vutbr.cz}{\nolinkurl{xondry02@stud.fit.vutbr.cz}})}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Hladká sazba}
+
+Hladká sazba používá jeden stupeň, druh a~řez písma a~je sázena na stanovenou šířku odstavce. Skládá se z~odstavců, obvykle začínajících zarážkou, nejde-li o~první odstavec za nadpisem. Mohou ale být sázeny i bez zarážky\,--\,rozhodující je celková grafická úprava. Odstavec končí východovou řádkou. Věty nesmějí začínat číslicí.
+
+Zvýraznění barvou, podtržením, ani změnou písma se v~odstavcích nepoužívá. Hladká sazba je určena především pro delší texty, jako je beletrie. Porušení konzistence sazby působí v~textu rušivě a unavuje čtenářův zrak.
+
+\section{Smíšená sazba}
+
+Smíšená sazba má o~něco volnější pravidla. Klasická hladká sazba se doplňuje o~další řezy písma pro zvýraznění důležitých pojmů. Existuje „pravidlo“:
+
+\begin{quotation}
+{\fontfamily{pag}\selectfontČím více druhů}, \textsc{řezů}, {\tiny velikostí}, barev písma \underline{a jiných efektů} použijeme, tím \emph{\large profesionálněji} bude dokument vypadat. Čtenář tím bude vždy \textsc{nadšen}!
+\end{quotation}
+
+{\footnotesize Tímto} pravidlem se nikdy \textbf{nesmíte} řídit. Příliš časté {\large zvýrazňování} textových elementů a změny velikosti {\huge písma}\ \ jsou známkou amatérismu autora a působí {\Huge velmi} rušivě. Dobře navržený dokument nemá obsahovat více než 4 řezy či druhy písma. Dobře navržený dokument je decentní, ne chaotický.
+
+Důležitým znakem správně vysázeného dokumentu je konzistence\,--\,například \textbf{tučný řez} písma bude vyhrazen pouze pro klíčová slova, \emph{skloněný řez} pouze pro doposud neznámé pojmy a nebude se to míchat. Skloněný řez nepůsobí tak rušivě a používá se častěji. V~\LaTeX u jej sázíme raději příkazem \verb|\emph{text}| než \verb|\textit{text}|.
+
+Smíšená sazba se nejčastěji používá pro sazbu vědeckých článků a technických zpráv. U~delších dokumentů vědeckého či technického charakteru je zvykem vysvětlit význam různých typů zvýraznění v~úvodní kapitole.
+
+\section{České odlišnosti}
+
+Česká sazba se oproti okolnímu světu v~některých aspektech mírně liší. Jednou z~odlišností je sazba uvozovek. Uvozovky se v~češtině používají převážně pro zobrazení přímé řeči, zvýraznění přezdívek a ironie. V~češtině se používají uvozovky typu „9966“ místo ``anglických'' uvozovek nebo "dvojitých" uvozovek. Lze je sázet připravenými příkazy nebo při použití UTF-8 kódování i přímo.
+
+Ve smíšené sazbě se řez uvozovek řídí řezem prvního uvozovaného slova. Pokud je uvozována celá věta, sází se koncová tečka před uvozovku, pokud se uvozuje slovo nebo část věty, sází se tečka za uvozovku.
+
+Druhou odlišností je pravidlo pro sázení konců řádků. V~české sazbě by řádek neměl končit osamocenou jednopísmennou předložkou nebo spojkou. Spojkou „a“ končit může pouze při sazbě do šířky 25 liter. Abychom \LaTeX u zabránili v~sázení osamocených předložek, spojujeme je s~následujícím slovem \emph{nezlomitelnou mezerou}. Tu sázíme pomocí znaku \~\ (vlnka, tilda). Pro~systematické doplnění vlnek slouží volně šiřitelný program \emph{vlna} od pana Olšáka\footnote{Viz \url{http://petr.olsak.net/ftp/olsak/vlna/}}.
+
+Balíček \verb|fontenc| slouží ke korektnímu kódovaní znaků s~diakritikou, aby bylo možno v~textu vyhledávat a~kopírovat z~něj.
+
+\section{Závěr}
+
+Tento dokument\footnote{Příliš mnoho poznámek pod čarou čtenáře zbytečně rozptyluje. Používejte je opravdu střídmě. (Šetřete i s textem v~závorkách.)} je členěn na sekce pomocí příkazu \verb|\section|. Jedna ze sekcí schválně obsahuje několik typografických prohřešků. V~kontextu celého textu je jistě snadno najdete. Je dobré znát možnosti \LaTeX u, ale je také nutné vědět, kdy je nepoužít.
+
+\end{document}

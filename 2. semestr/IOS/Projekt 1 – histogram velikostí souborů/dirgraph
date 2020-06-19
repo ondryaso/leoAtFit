@@ -1,0 +1,220 @@
+#!/bin/sh
+
+# dirgraph - directory reporting tool
+# Author: Ondřej Ondryáš (xondry02), FIT BUT
+# Date: 2020-03-30
+# Usage: ./dirgraph [-i FILE_ERE] [-n] [Target directory]
+# Possible exit codes:
+# 0 - ok
+# 1 - invalid arguments
+# 2 - root directory is not accessible
+# 3 - root directory is filtered by the specified regex
+# 4 - results might be inaccurate because a file or directory couldn't be accessed or because of a symlink filesystem loop
+
+export POSIXLY_CORRECT=yes
+
+# Argument parsing
+while getopts ":i:n" opt; do
+    case ${opt} in
+        i)
+        IGNORE=$OPTARG
+        ;;
+        n)
+        NORM=true
+        ;;
+        : )
+        echo "Option -$OPTARG requires an argument." >&2
+        exit 1
+        ;;
+        \?)
+        ;;
+    esac
+done
+
+shift $((OPTIND -1))
+
+if [ $# -gt 0 ]; then
+    WDIR="$1"
+
+    if [ ! -d "$WDIR" ]; then
+        echo "$WDIR is not an accessible directory." >&2
+        exit 2
+    fi
+else
+    WDIR=$PWD
+fi
+
+if ! ls "$WDIR" >/dev/null 2>/dev/null; then
+    echo "$WDIR is not an accessible directory." >&2
+    exit 2
+fi
+
+is_filtered() {
+    if [ -z "$IGNORE" ]; then return 1; fi;
+    basename "$1" | grep -q -E "$IGNORE" -
+    return $?  
+}
+
+
+if [ -n "$IGNORE" ]; then 
+    if is_filtered "$WDIR"; then
+        echo "The working directory must not be filtered by the specified filter." >&2
+        exit 3
+    fi
+fi
+
+cat100B=0
+cat1KiB=0
+cat10KiB=0
+cat100KiB=0
+cat1MiB=0
+cat10MiB=0
+cat100MiB=0
+cat1GiB=0
+cat1GiBHigher=0
+
+dirCount=0
+fileCount=0
+
+exit_code=0
+
+classify_file() {
+    if is_filtered "$1"; then return; fi
+
+    fs=$(ls -l "$1") # wc -c wouldn't report the size without reading perms
+
+    if [ ! $? ]; then
+        echo "Can't classify file \"$1\". Results might be inaccurate." >&2
+        exit_code=4
+        return
+    fi
+
+    fs=$(echo "$fs" | awk '{print $5}')
+
+    if [ "$fs" -lt 100 ]; then
+        cat100B=$((cat100B+1))
+    elif [ "$fs" -lt 1024 ]; then
+        cat1KiB=$((cat1KiB+1))
+    elif [ "$fs" -lt 10240 ]; then
+        cat10KiB=$((cat10KiB+1))
+    elif [ "$fs" -lt 102400 ]; then
+        cat100KiB=$((cat100KiB+1))
+    elif [ "$fs" -lt 1048576 ]; then
+        cat1MiB=$((cat1MiB+1))
+    elif [ "$fs" -lt 10485760 ]; then
+        cat10MiB=$((cat10MiB+1))
+    elif [ "$fs" -lt 104857600 ]; then
+        cat100MiB=$((cat100MiB+1))
+    elif [ "$fs" -lt 1073741824 ]; then
+        cat1GiB=$((cat1GiB+1))
+    else
+        cat1GiBHigher=$((cat1GiBHigher+1))
+    fi
+
+    fileCount=$((fileCount+1))
+}
+
+symlink_loop_detected=0
+
+walk_dir() {
+    if is_filtered "$1"; then return; fi
+
+    dirCount=$((dirCount+1))
+
+    if ! ls "$1" >/dev/null 2>/dev/null; then
+        echo "Can't access directory $1. Results might be inaccurate." >&2
+        exit_code=4
+        return
+    fi
+
+    for found in "$1"/* "$1"/.[!.] "$1"/.??*; do
+        if [ -h "$found" ]; then
+            if [ $symlink_loop_detected -eq 0 ]; then
+                if ! find -L "$found" >/dev/null 2>/dev/null; then
+                    echo "File system loop detected for symlink $found. Results will be inaccurate." >&2
+                    symlink_loop_detected=1
+                    exit_code=4
+                fi
+            fi
+        fi
+        
+        if [ -f "$found" ]; then
+            classify_file "$found"
+        elif [ -d "$found" ]; then
+            walk_dir "$found"
+        fi
+    done
+}
+
+get_max() {
+    max=0
+    for var in "$@"; do
+        if [ "$var" -gt "$max" ]; then
+            max=$var
+        fi
+    done
+}
+
+normalise() {
+    get_max $cat100B $cat1KiB $cat10KiB $cat100KiB $cat1MiB $cat10MiB $cat100MiB $cat1GiB $cat1GiBHigher
+    
+    maxLen=67 # =79-12; subtract 12 characters of category name
+    if [ -t 0 ] && [ -t 1 ]; then
+        maxLen=$(($(tput cols)-1-12)) # 
+    fi
+
+    if [ "$max" -gt "$maxLen" ]; then
+        scale=maxLen/max
+        cat1GiBHigher=$((cat1GiBHigher*$scale))
+        cat1GiB=$((cat1GiB*$scale))
+        cat100MiB=$((cat100MiB*$scale))
+        cat10MiB=$((cat10MiB*$scale))
+        cat1MiB=$((cat1MiB*$scale))
+        cat100KiB=$((cat100KiB*$scale))
+        cat10KiB=$((cat10KiB*$scale))
+        cat1KiB=$((cat1KiB*$scale))
+        cat100B=$((cat100B*$scale))
+    fi
+}
+
+print_cat() {
+    if [ "$3" ]; then 
+        catName="  >="
+        sizeMod="$2Higher"
+    else 
+        catName="  <"
+        sizeMod=$2
+    fi
+
+    catName="$catName$1 $2"
+    printf "%-10s: " "$catName"
+
+    eval toPrint="\$cat$1$sizeMod"
+    while [ "$toPrint" -gt 0 ]
+    do
+        printf \#
+        toPrint=$((toPrint-1))
+    done
+    printf \\n
+}
+
+walk_dir "$WDIR"
+[ $NORM ] && normalise;
+
+echo "Root directory: $WDIR"
+echo "Directories: $dirCount"
+echo "All files: $fileCount"
+
+echo "File size histogram:"
+
+print_cat 100 B
+print_cat 1 KiB
+print_cat 10 KiB
+print_cat 100 KiB
+print_cat 1 MiB
+print_cat 10 MiB
+print_cat 100 MiB
+print_cat 1 GiB
+print_cat 1 GiB true
+
+exit $exit_code

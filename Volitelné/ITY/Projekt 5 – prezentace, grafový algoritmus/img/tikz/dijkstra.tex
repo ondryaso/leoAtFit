@@ -1,0 +1,64 @@
+\begin{tikzpicture}[
+    node distance = 22mm,
+    every state/.append style = {inner sep=0pt, fill=gray!10,
+                                 minimum size=7mm},
+    every edge/.style = {draw, bend angle=15},auto=right]
+    
+    \tikzset{foundEdge/.style={gray!30, line width=5pt}}
+    \tikzset{done/.style={state, fill=green!75}}
+    \tikzset{gre/.style={state, fill=gray!50}}
+    
+    \node (s1) [visible on=<1>,   gre]                       {0};
+    \node (s1) [visible on=<2->, done]                       {0};
+    
+    \node (s2) [visible on=<1>,  state, above right=of s1]   {$\infty$};
+    \node (s2) [visible on=<2>,    gre, above right=of s1]   {2?};
+    \node (s2) [visible on=<3->,  done, above right=of s1]   {2};
+    
+    \node (s3) [visible on=<1-2>,state, right=of s2]         {$\infty$};
+    \node (s3) [visible on=<3-5>,  gre, right=of s2]         {8?};
+    \node (s3) [visible on=<6->,  done, right=of s2]         {8};
+    
+    \node (s4) [visible on=<1-3>,state, below right=of s3]   {$\infty$};
+    \node (s4) [visible on=<4-5>,  gre, below right=of s3]   {12?};
+    \node (s4) [visible on=<6>,    gre, below right=of s3]   {10?};
+    \node (s4) [visible on=<7>,   done, below right=of s3]   {10};
+    
+    \node (s5) [visible on=<1-2>,state, below  left=of s4]   {$\infty$};
+    \node (s5) [visible on=<3>,    gre, below  left=of s4]   {5?};
+    \node (s5) [visible on=<4->,  done, below  left=of s4]   {5};
+    
+    \node (s6) [visible on=<1>,  state, left=of s5]          {$\infty$};
+    \node (s6) [visible on=<2->,   gre, left=of s5]          {8?};
+    \node (s6) [visible on=<3>,    gre, left=of s5]          {7?};
+    \node (s6) [visible on=<4>,    gre, left=of s5]          {6?};
+    \node (s6) [visible on=<5->,  done, left=of s5]          {6};
+    
+    %
+    \draw[foundEdge, visible on=<2->]
+            (s1) to                     (s2);
+    \draw[foundEdge, visible on=<2>]
+            (s1) to                     (s6);
+    \draw[foundEdge, visible on=<3>]
+            (s2) to                     (s6);
+    \draw[foundEdge, visible on=<3->]
+            (s2) to                     (s3);
+    \draw[foundEdge, visible on=<3->]
+            (s2) to                     (s5);
+    \draw[foundEdge, visible on=<4->]
+            (s5) to                     (s6);
+    \draw[foundEdge, visible on=<4-5>]
+            (s5) to                     (s4);
+    \draw[foundEdge, visible on=<6->]
+            (s3) to                     (s4);
+    %
+    \draw   (s1) edge ["2"]             (s2)
+            (s1) edge ["8"]             (s6)
+            (s2) edge ["6"]             (s3)
+            (s2) edge ["3"]             (s5)
+            (s2) edge ["5"]             (s6)
+            (s3) edge ["2"]             (s4)
+            (s3) edge ["5"]             (s5)
+            (s5) edge ["7"]             (s4)
+            (s5) edge ["1"]             (s6);
+\end{tikzpicture}
