@@ -1,6 +1,6 @@
 # LeO@FIT
 ### a.k.a. tryharding.
-V tomto repozitáři udržuji všechna zveřejnitelná řešení projektů, úkolů a různých prací, které mě potkaly během bakalářského studia na [Fakultě informačních technologií VUT v Brně](https://fit.vut.cz). Povinné předměty jsou rozděleny po semestrech. Ke každému předmětu jsou (či budou) v jeho `README` nějaké moje informace a poznatky, které se při studiu mohou hodit.
+V tomto repozitáři udržuji všechna zveřejnitelná řešení projektů, úkolů a různých prací, která mě potkala během bakalářského studia na [Fakultě informačních technologií VUT v Brně](https://fit.vut.cz). Povinné předměty jsou rozděleny po semestrech. Ke každému předmětu jsou (či budou) v jeho `README` nějaké moje informace a poznatky, které se při studiu mohou hodit, spolu s mými poznámkami, studijními materiály, které jsem si k němu sepsal.
 
 ## Obsah
 ### 1. semestr
@@ -13,14 +13,14 @@ V tomto repozitáři udržuji všechna zveřejnitelná řešení projektů, úko
 ### 2. semestr
 - **IMA1**: tahák ke zkoušce
 - **INC**: projekt – přístupový terminál (VHDL kód + výstupní zpráva), výpisky z přednášek
-- **IOS**: projekty (shell, synchronizace), _studijní opora-like_ zápisky z přednášek [v separátním repozitáři](https://github.com/ondryaso/FIT-IOS-notes), koncentrované výpisky ke zkoušce
-- **ISU**: zdroje k ISU mám [v separátním repozitáři](https://github.com/ondryaso/isu-exaples), tady nějaké poznámky ke zkoušce
+- **IOS**: projekty (shell, synchronizace), _studijní opora-like_ výpisky z přednášek [v separátním repozitáři](https://github.com/ondryaso/FIT-IOS-notes), koncentrované výpisky ke zkoušce
+- **ISU**: zdroje k ISU mám [v separátním repozitáři](https://github.com/ondryaso/isu-examples), tady nějaké poznámky ke zkoušce
 - **IZG**: projekt – softwarový renderer a Phongův osvětlovací model
 
 ### Volitelné
 - **IJC**: projekty (bitset, steg-decode, tail, hashtable, wordcount)
 - **ITY**: projekty (sazba v LaTeXu)
-- **IVS**: projekt 1 (testování), projekt 2 v separátním repozitáři, který zveřejníme později
+- **IVS**: projekt 1 (testování), projekt 2 [v separátním repozitáři](https://github.com/FrNecas/SunnyCalc)
 
 ## Disclaimer a copyright
 Všechny materiály zde dostupné slouží **výhradně** pro **inspiraci a podporu studia**. Pokud se některý z nich pokusíte odevzdat jako své dílo, pravděpodobně to skončí hodnocením 0 bodů a příjemným pokecem s disciplinární komisí. Nedělejte to.
