@@ -1,0 +1,41 @@
+# V tomto souboru je specifikovano mapovani KAZDEHO jednotliveho bitu (signalu)
+# tvoriciho rozhrani nami popisovane komponenty "vigenere". Vstupy a vystupy
+# jsou (krome SMCLK a RST) vyvedeny na vybrane vyvody pole X10 na FITkitu,
+# prestoze je nebudeme nijak vyuzivat. Pro simulaci je toto nepodstatne, ale
+# synteza bitstreamu pro FPGA by bez toho nemohla probehnout. SYNTEZA JE JEDNOU
+# Z HODNOCENYCH CASTI RESENI, PRICEMZ JEJI PRUBEH BEZ CHYB A VAROVANI JE NUTNOU
+# PODMINKOU PRO UDELENI PLNEHO HODNOCENI.
+
+# SMCLK je hlavni hodinovy vstup FPGA na FITkitu,
+# zde pro nej specifikujeme kmitocet, dany krystalem,
+# ktery ma na FITkitu hodnotu 7.3728 MHz...
+NET CLK TNM_NET = smclk_pin;
+TIMESPEC TS_smclk_pin = PERIOD smclk_pin 7.3728 MHz;
+# ...a priradime pin na FPGA podle schematu k FITkitu.
+NET CLK      LOC = P80;
+
+NET RST      LOC = P155;
+NET DATA<0>     LOC = P204;
+NET DATA<1>     LOC = P2;
+NET DATA<2>     LOC = P7;
+NET DATA<3>     LOC = P10;
+NET DATA<4>     LOC = P12;
+NET DATA<5>     LOC = P15;
+NET DATA<6>     LOC = P18;
+NET DATA<7>     LOC = P20;
+NET KEY<0>     LOC = P26;
+NET KEY<1>     LOC = P28;
+NET KEY<2>     LOC = P34;
+NET KEY<3>     LOC = P36;
+NET KEY<4>     LOC = P39;
+NET KEY<5>     LOC = P42;
+NET KEY<6>     LOC = P44;
+NET KEY<7>     LOC = P46;
+NET CODE<0>     LOC = P3;
+NET CODE<1>     LOC = P13;
+NET CODE<2>     LOC = P9;
+NET CODE<3>     LOC = P16;
+NET CODE<4>     LOC = P203;
+NET CODE<5>     LOC = P19;
+NET CODE<6>     LOC = P205;
+NET CODE<7>     LOC = P21;
