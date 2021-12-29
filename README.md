@@ -6,7 +6,7 @@ V tomto repozitáři udržuji všechna zveřejnitelná řešení projektů, úko
 ### 1. semestr
 - **IDM**: domácí úkol, tahák ke zkoušce
 - **ILG**: domácí úkol, tahák ke zkoušce, důkaz rovnosti determinantů (bonusový bodík), kód pro numerický výpočet řešení soustavy rovnic pomocí Gauss-Seidelovy metody
-- **IUS**: projekt č. 51 – Kavárenský povaleč (ER diagram, Use case diagram), výpisky ke zkoušce
+- **IUS**: projekt č. 61 – Kavárenský povaleč (ER diagram, Use case diagram), výpisky ke zkoušce
 - **IEL**: projekt – výpočty v obvodech (v LaTeXu), nějaké výpisky ke zkoušce
 - **IZP**: projekty
 
@@ -17,10 +17,27 @@ V tomto repozitáři udržuji všechna zveřejnitelná řešení projektů, úko
 - **ISU**: zdroje k ISU mám [v separátním repozitáři](https://github.com/ondryaso/isu-examples), tady nějaké poznámky ke zkoušce
 - **IZG**: projekt – softwarový renderer a Phongův osvětlovací model
 
+### 3. semestr
+- **IAL**: úkoly (c201, c203, c206, c016, c401, c402), výpisky ke zkoušce (přehledy algoritmů, pseudokódy...)
+- **IFJ**: výpisky ke zkoušce, projekt [v separátním repozitáři](https://github.com/Adda0/ifj20-go-compiler)
+- **IMA2**: domácí úkoly, tahák ke zkoušce
+- **INP**: projekty (Vigenèrova šifra, CPU interpretující BrainFuck)
+- **IPT**: domácí úkoly, tahák ke zkoušce
+- **ISS**: projekt (analýza vlivu roušky na řeč)
+
+### 4. semestr
+- **IDS**: celkem obsáhlé výpisky z přednášek (také celkem _studijní opora-like_), prezentace k hromadné konzultaci (dotazování v SQL), projekt (z IUS, Kavárenský povaleč)
+- **IPK**: poznámky z přednášek, výpisky ke zkoušce
+- **IPP**: poznámky z přednášek
+- **IZU**: projekty (most a pochodeň, Prolog, ID3, k-means), výpisky ke zkoušce, poznámky k Prologu
+
 ### Volitelné
-- **IJC**: projekty (bitset, steg-decode, tail, hashtable, wordcount)
+- **IJC**: projekty (bitset, steg-decode, tail, hashtable, wordcount), trapně trivální
 - **ITY**: projekty (sazba v LaTeXu)
 - **IVS**: projekt 1 (testování), projekt 2 [v separátním repozitáři](https://github.com/FrNecas/SunnyCalc)
+- **IAM**: vypracované úkoly do jednotlivých částí (SAT solver, SMT solver, teorie čísel, Markovské řetězce), nějaké důkazy, závěrečný test, výpisky z přednášek
+- **IPA**: projekt – filtr pro zvýraznění barev založený na K-means, programy z jednotlivých cvičení, přehled zkoušených věcí a výpisky ke zkoušce
+- **ICP**: jen projekt, aktuálně nezveřejněn
 
 ## Disclaimer a copyright
 Všechny materiály zde dostupné slouží **výhradně** pro **inspiraci a podporu studia**. Pokud se některý z nich pokusíte odevzdat jako své dílo, pravděpodobně to skončí hodnocením 0 bodů a příjemným pokecem s disciplinární komisí. Nedělejte to.

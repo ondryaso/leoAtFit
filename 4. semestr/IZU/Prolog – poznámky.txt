@@ -1,0 +1,178 @@
+% 1 - Zjištění délky seznamu čísel typu Integer bez nul.
+delka_seznamu([], 0).
+delka_seznamu([X|T], Res) :- X =\= 0, delka_seznamu(T, R2), Res is R2+1, !; delka_seznamu(T, Res).
+
+% 2 - Získání první poloviny seznamu.
+% Pokud seznam má lichý počet prvků, je délka první poloviny seznamu o jedno menší než délka druhé poloviny.
+same_len(A, B) :- length(A, N), length(B, N).
+same_len(A, B) :- length(A, N), M is N + 1, length(B, M).
+
+append([], X, X).
+append([X|A], B, [X|R]) :- append(A, B, R).
+
+split([], [], []).
+split(Input, Left, Right) :- append(Left, Right, Input), same_len(Left, Right). % ,!.
+
+% 3 - Získání podseznamu, který začíná prvním prvkem a má zadanou délku.
+sublist(_, [], 0).
+sublist([X|TInput], [X|TResult], Len) :- L2 is Len - 1, sublist(TInput, TResult, L2). % ,!.
+
+% 4 - Rozdíl maxima a minima seznamu čísel typu Integer.
+max_val([X], X) :- !.
+max_val([X|TInput], Val) :- max_val(TInput, Val), Val > X, !; Val = X.
+
+min_val([X], X) :- !.
+min_val([X|TInput], Val) :- min_val(TInput, Val), Val < X, !; Val = X.
+
+max_min_dif(Input, Res) :- max_val(Input, Max), min_val(Input, Min), Res is Max - Min.
+
+% 5 - Zjištění, zdali se jedná seznam obsahující pouze sudá nebo pouze lichá čísla.
+only_evens([]).
+only_evens([X|TInput]) :- X mod 2 =:= 0, only_evens(TInput).
+only_odds([]).
+only_odds([X|TInput]) :- X mod 2 =:= 1, only_odds(TInput).
+
+only_odds_or_evens(Input) :- only_odds(Input), !; only_evens(Input), !.
+
+% 6 - Zjištění, zdali se jedná seznam obsahující pouze kladná nebo pouze záporná čísla.
+only_neg([]).
+only_neg([X|TInput]) :- X < 0, only_neg(TInput).
+only_pos([]).
+only_pos([X|TInput]) :- X > 0, only_pos(TInput).
+
+only_pos_or_neg(Input) :- only_pos(Input), !; only_neg(Input), !.
+
+% 7 - Zjištění rozdílu počtu kladných a záporných čísel v seznamu čísel typu Integer.
+split_pos_neg([], [], []).
+split_pos_neg([X|TPos], Neg, [X|TIn]) :- X > 0, !, split_pos_neg(TPos, Neg, TIn).
+split_pos_neg(Pos, [X|TNeg], [X|TIn]) :- X < 0, !, split_pos_neg(Pos, TNeg, TIn).
+len([], 0).
+len([_|In], Res) :- len(In, R2), Res is R2+1.
+pos_neg_count(Pos, Neg, In) :- split_pos_neg(PL, NL, In), len(PL, Pos), len(NL, Neg).
+
+% 8 - Zjištění, zdali rozdíl mezi dvěma následnými čísly v neprázdném seznamu je vždy
+% menší nebo stejný, než je zadané číslo.
+task8([], _) :- !.
+task8([_], _) :- !.
+task8([X,Y|T], MaxDif) :- D is abs(X-Y), A = D, A =< MaxDif, task8(T, MaxDif).
+
+% 9 - Najit největší rozdíl mezi dvěma následnými čísly v seznamu čísel typu Integer.
+max_dif([X,Y|T], Res) :- D is X-Y, max_dif(T, Res), Res > D; D is X-Y, Res = D.
+
+% X - Výpočet Fibonacciho posloupnosti
+fib(0, 0) :- !.
+fib(1, 1) :- !.
+fib(In, Res) :- A is In - 2, B is In - 1, fib(A, X), fib(B, Y), Res is X+Y.
+
+% 10 - Výpočet Fibonacciho posloupnosti zadané délky
+peek_two([B, A], A, B).
+peek_two([_|T], A, B) :- peek_two(T, A, B).
+
+fib_seq(0, []).
+fib_seq(1, [0]).
+fib_seq(2, [0, 1]).
+fib_seq(N, Res) :- N > 2, N1 is N-1, fib_seq(N1, S), peek_two(S, F1, F2), F is F1+F2, append(S, [F], Res).
+
+% 11 - Rozdělení seznamu čísel typu Integer na dva seznamy čísel podle zadaného prahu.
+split_thresh([], [], [], _).
+split_thresh([X|In], [X|L], G, T) :- X > T, !, split_thresh(In, L, G, T).
+split_thresh([X|In], L, [X|G], T) :- X =< T, !, split_thresh(In, L, G, T).
+
+% 12 - Je seznam palindrom?
+reverse([], R, R).
+reverse([X|Xs], Accumulator, R) :- reverse(Xs, [X|Accumulator], R).
+reverse(In, Out) :- reverse(In, [], Out).
+
+is_pali(A) :- reverse(A, A).
+
+% 17 - Skalární součin.
+dotprod([X], [Y], Res) :- Res is X * Y, !.
+dotprod([X|V1], [Y|V2], Res) :- M is X * Y, dotprod(V1, V2, R), Res is R + M.
+
+% 22 - Zip.
+zip_a(A, [], A).
+zip_a(A, [X|B], [X|R]) :- zip(A, B, R).
+zip([], B, B).
+zip([X|A], B, [X|R]) :- zip_a(A, B, R).
+
+% -------------------
+% Monotónnost
+rostouci([]).
+rostouci([_]).
+rostouci([X, Y|T]) :- Y >= X, rostouci(T).
+
+klesajici([]).
+klesajici([_]).
+klesajici([X, Y|T]) :- Y =< X, klesajici(T).
+
+% Faktoriál
+fac(0, 1) :- !.
+fac(N, 0) :- N < 0, fail.
+fac(N, R) :- A is N-1, fac(A, FA), R is FA * N.
+
+
+% -------------------
+% Stack
+
+% st_push(Value, InputStack, OutputStack)
+st_push(Value, IStack, [Value|IStack]).
+% st_pop(Value, InputStack, OutputStack)
+st_pop(Value, [Value|TIStack], TIStack).
+
+% Queue (append na konec)
+
+% enqueue(Value, InputQueue, OutputQueue)
+enqueue(Val, [], [Val]).
+enqueue(Val, [H|TI], [H|TO]) :- enqueue(Val, TI, TO).
+% dequeue(Value, InputQueue, OutputQueue)
+dequeue(Val, [Val|TI], TI).
+
+% Priority Queue
+
+% A should be dequeued before B
+has_priority(A, B) :- A =< B.
+
+insert(Val, [], [Val]).
+insert(Val, [H|T], [Val,H|T]) :- has_priority(Val, H).
+insert(Val, [H|T1], [H|T2]) :- has_priority(H, Val), insert(Val, T1, T2).
+
+% Set
+
+% prvkové operace
+member(Val, [Val|_]) :- !.
+member(Val, [_|T]) :- member(Val, T).
+
+add(Val, S, S) :- member(Val, S), !.
+add(Val, S, [Val|S]).
+
+delete(_, [], []).
+delete(Val, [Val|T], T) :- !.
+delete(Val, [H|T], [H|Res]) :- delete(Val, T, Res).
+
+% množinové operace op(A, B, Result), Result = A op B
+intersect([], _, []).
+intersect([H|TA], B, [H|TR]) :- member(H, B), !, intersect(TA, B, TR).
+intersect([_|TA], B, R) :- intersect(TA, B, R).
+
+union([], S, S).
+union([H|TA], B, R) :- union(TA, B, R2), add(H, R2, R).
+
+difference([], _, []).
+difference([H|TA], B, R) :- member(H, B), !, difference(TA, B, R).
+difference([H|TA], B, [H|TR]) :- difference(TA, B, TR).
+
+subset([], _).
+subset([H|TA], B) :- member(H, B), subset(TA, B).
+
+eqset(A, B) :- subset(A, B), subset(B, A).
+
+emptyset([]).
+
+cartesian_sub(_, [], []) :- !.
+cartesian_sub(X, [Y|TB], [[X, Y]|TR]) :- cartesian_sub(X, TB, TR).
+cartesian([], _, []) :- !.
+cartesian([X|TA], B, R) :- cartesian_sub(X, B, R2), cartesian(TA, B, R3), append(R2, R3, R).
+
+list_to_set([], []).
+list_to_set([X|T], R) :- member(X, T), list_to_set(T, R).
+list_to_set([X|T], [X|TR]) :- list_to_set(T, TR).
