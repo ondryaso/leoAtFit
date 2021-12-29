@@ -8,6 +8,8 @@ Hodnocení: 25/25
 
 Dělal jsem zadání **61: Kavárenský povaleč**. Pokud se nic nezmění, celé zadání najdete [na stránce projektů](https://www.fit.vutbr.cz/study/courses/IUS/private/projekt.html.cs). V ER jsou červeně označeny atributy, které lze odvodit od jiných dat v systému (resp. vypočítat), ale prakticky je dobré udržovat je někde bokem jako jednoduché číslo.
 
+Odevzdaný ER diagram neobsahuje jednu entitní množinu, kterou by obsahovat měl; toto je opraveno v souboru `ER diagram fixed.drawio`.
+
 ## Výpisky ke zkoušce
 PDF obsahuje:
 - 1: SW inženýrství, problémy při vývoji

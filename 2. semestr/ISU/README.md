@@ -15,6 +15,9 @@ Obsah PDF:
 - 9: převody soustav, kódování čísel v binárce
 - 10: formát čísla s plovoucí desetinnou čárkou v FPU
 
+## Sčítání pro začátečníky
+Prezentace vysvětlující, jak funguje sčítání v binární soustavě, jak funguje doplňkový kód a jak se dá poznat přetečení při bezznaménkovém (carry) a znaménkovém (overflow) sčítání.
+
 ## Zkouška
 Zkouška se už roky prakticky nezměnila – na Fitušce najdete zkoušky z roku 2015/16 a 2016/17, pokud zvládnete napsat tyhle, zvládnete dost pravděpodobně i tu svou. Co je třeba znát:
 - **Aritmetické instrukce**: ADD, SUB, **ADC**, **SBB**, **(I)MUL** a **(I)DIV** 
