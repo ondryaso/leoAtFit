@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPPcode Test Report</title>
+    <style type="text/css">
+        * {
+            font-family: sans-serif;
+        }
+
+        body {
+            margin: 1.5em;
+        }
+
+        h1 {
+            margin: 0.4em 0;
+            font-size: x-large;
+        }
+
+        h2 {
+            margin: 1em 0 0.4em;
+            font-size: larger;
+        }
+
+        p {
+            margin: 0.4em 0;
+        }
+
+        hr {
+            border-top: 1px solid #d2d2d2;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            margin-right: 100%;
+            width: 100%;
+        }
+
+        ul {
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 0.3em;
+            font-family: monospace;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        @media (min-width: 576px) {
+            .container {
+                width: 75%;
+                margin: 0 auto;
+            }
+        }
+
+        /* Inspired by: https://www.w3schools.com/howto/howto_js_collapsible.asp */
+        .collapsible {
+            background-color: #eee;
+            cursor: pointer;
+            color: #444;
+            padding: 0.5em 0.7em;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #929292;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #d0d0d0;
+        }
+
+        .active {
+            border-bottom: none;
+        }
+
+        .collapsible:last-of-type {
+            border-bottom: none;
+        }
+
+        .col_control {
+            margin-bottom: 1em;
+            float:right;
+        }
+
+        .col_control a {
+            text-decoration: none;
+            color: black;
+            padding-left: 1em;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #929292;
+        }
+
+        .collapsible:after {
+            content: '+';
+            font-size: 15px;
+            color: black;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: '–';
+        }
+
+        .successful {
+            color: #1ab30b;
+            font-weight: bolder;
+        }
+
+        .failed {
+            color: #df4128;
+            font-weight: bolder;
+        }
+
+        .fail_reason {
+            margin-left: 1.5em;
+            font-weight: bolder;
+        }
+
+        .additional_info {
+            font-size: small;
+            font-weight: lighter;
+            margin-top: 4em;
+        }
+
+        pre {
+            font-family: monospace;
+            overflow-x: auto;
+            margin-top: 0;
+        }
+
+        .test_path {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Test report</h1>
+    <hr>
+    <div>
+        <p>Test mode: %mode%</p>
+        <p>Tests were found in following directories:</p>
+        <ul>
+            %dirs%
+        </ul>
+    </div>
+
+    <h2>Summary</h2>
+    <div>
+        <p>Total number of tests: %total_tests%</p>
+        <p>Successful tests: <span class="successful">%successful_tests%</span> (%st_perc% %)</p>
+        <p>Failed tests: <span class="failed">%failed_tests%</span> (%ft_perc% %)</p>
+        <p>Tests with unexpected return code: %unexpected_rc%</p>
+        <p>Tests with unexpected output: %unexpected_out%</p>
+    </div>
+
+    <h2>Detailed results</h2>
+    <div class="col_control">
+        <a href="#" onclick="setAllCollapsibles(true)">Expand all</a>
+        <a href="#" onclick="setAllCollapsibles(false)">Hide all</a>
+        <a href="#" onclick="window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight); return false">Scroll to bottom</a>
+    </div>
+
+    %invalid_rc_start%
+    <button type="button" class="collapsible"><span class="test_name failed">%test_name%</span>
+        <span class="fail_reason">invalid %phase_name% return code</span> (expected: %expected_rc%, actual: %actual_rc%)
+    </button>
+    <div class="content">
+        <p>Source path: <span class="test_path">%test_src%</span></p>
+        <p>Run time: %test_time% ms</p>
+        <p>Error output:</p>
+        <pre>%error_output%</pre>
+        <p>Output:</p>
+        <pre>%output%</pre>
+        <p>Expected output:</p>
+        <pre>%expected_output%</pre>
+    </div>
+    %invalid_rc_end%
+
+    %invalid_output_start%
+    <button type="button" class="collapsible"><span class="test_name failed">%test_name%</span>
+        <span class="fail_reason">invalid %phase_name% output</span></button>
+    <div class="content">
+        <p>Source path: <span class="test_path">%test_src%</span></p>
+        <p>Run time: %test_time% ms</p>
+        <p>Return code: %actual_rc%</p>
+        <p>Output:</p>
+        <pre>%output%</pre>
+        <p>Expected output:</p>
+        <pre>%expected_output%</pre>
+        <p>Diff:</p>
+        <pre>%diff%</pre>
+    </div>
+    %invalid_output_end%
+
+    %successful_start%
+    <button type="button" class="collapsible"><span class="test_name successful">%test_name%</span></button>
+    <div class="content">
+        <p>Source path: <span class="test_path">%test_src%</span></p>
+        <p>Run time: %test_time% ms</p>
+        <p>Return code: %expected_rc%</p>
+        <p>Output:</p>
+        <pre>%output%</pre>
+    </div>
+    %successful_end%
+
+    %errors_start%
+    <hr>
+    <h2>Tests failed to run</h2>
+    <div>
+        <ul>
+            %error_tests%
+        </ul>
+    </div>
+    %errors_end%
+
+    <div class="col_control" style="margin-top: 0.4em;">
+        <a href="#" onclick="window.scrollTo(0, 0);">Scroll to top</a>
+    </div>
+
+    <div class="additional_info">
+        <p>Tests report generated on %datetime%.</p>
+        <p>Total running time: %total_time% ms.</p>
+        <p>Command line:</p>
+        <pre>%cmd_line%</pre>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    let coll = document.getElementsByClassName("collapsible");
+
+    for (let i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+
+            if (!isElementInViewport(this)) {
+                this.scrollIntoView();
+            }
+        });
+    }
+
+    function setAllCollapsibles(visible) {
+        for (let i = 0; i < coll.length; i++) {
+            coll[i].nextElementSibling.style.display = visible ? "block" : "none";
+        }
+    }
+</script>
+</body>
+</html>

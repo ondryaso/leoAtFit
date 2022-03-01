@@ -1,0 +1,27 @@
+Hodnocené části (nehodnocené části jsou vynechány):
+ 1) Automatické testy interpret.py - základní.
+ 2) Automatické testy interpret.py - registrovaná rozšíření (uvedená ve vašem souboru rozsireni). Zde zatím není aplikováno omezení na 5 bonusových bodů celkem.
+ 3) Automatické testy test.php (základní a registrovaná rozšíření) včetně ručního zhodnocení kvalit vytvořených HTML reportů.
+ 4) Případné malusy a bonusy (pozdní odevzdání, příspěvky na fóru, ...). Zde též není aplikováno omezení na 5 bonusových bodů celkem.
+ 5) Hodnocení dokumentace readme2(.pdf/.md) a štábní kultury zdrojových kódů (především komentářů). Za bodovým hodnocením dokumentace je v závorkách 30% korelace vzhledem k hodnocení z části 1)+3).
+
+Vaše hodnocení části 1): 7,36 bodů
+Vaše hodnocení části 2): 1,88 bodů
+Vaše hodnocení části 3): 2,90 bodů
+  Komentář hodnocení části 3): NOSTOP
+  Body za rozšíření k části 3): 0,70 bodů
+Vaše hodnocení části 5): 2,10 bodů (po 30% korelaci 2,10 bodů)
+  Komentář hodnocení části 5) (srážky uváděny v minibodech, 1 bod = 100 minibodů): OK + OOP
+
+Procentuální hodnocení jednotlivých kategorií skriptu interpret.py:
+Lexikální analýza (detekce chyb): 85%
+Syntaktická analýza (detekce chyb): 74%
+Sémantická analýza (detekce chyb): 100%
+Běhové chyby (detekce): 100%
+Interpretace instrukcí: 98%
+Interpretace netriviálních programů: 69%
+Volby příkazové řádky: 88%
+Rozšíření FLOAT 100%
+Rozšíření STACK 88%
+Rozšíření STATI 0%
+Celkem bez rozšíření: 91%

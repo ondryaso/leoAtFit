@@ -28,7 +28,7 @@ V tomto repozitáři udržuji všechna zveřejnitelná řešení projektů, úko
 ### 4. semestr
 - **IDS**: celkem obsáhlé výpisky z přednášek (také celkem _studijní opora-like_), prezentace k hromadné konzultaci (dotazování v SQL), projekt (z IUS, Kavárenský povaleč)
 - **IPK**: poznámky z přednášek, výpisky ke zkoušce
-- **IPP**: poznámky z přednášek
+- **IPP**: poznámky z přednášek, projekt
 - **IZU**: projekty (most a pochodeň, Prolog, ID3, k-means), výpisky ke zkoušce, poznámky k Prologu
 
 ### Volitelné

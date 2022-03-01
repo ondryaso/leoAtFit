@@ -1,0 +1,24 @@
+Hodnocené části (nehodnocené části jsou vynechány):
+ 1) Automatické testy parse.php - základní.
+ 2) Automatické testy parse.php - registrovaná rozšíření (uvedená ve vašem souboru rozsireni).
+ 3) Automatické testy test.php, pokud byl součástí archivu:
+      včetně ručního zhodnocení kvalit vytvořených HTML reportů.
+ 4) Případné malusy a bonusy (pozdní odevzdání, opravy zadání, ...).
+ 5) Hodnocení dokumentace readme1(.pdf/.md) a štábní kultury zdrojových kódů (především komentářů). Za bodovým hodnocením dokumentace je v závorkách 30% korelace vzhledem k hodnocení z části 1).
+
+Vaše hodnocení části 1): 5,88 bodů
+Vaše hodnocení části 2): 1,46 bodů
+Vaše hodnocení části 3): 0,40 bodů
+  Komentář hodnocení části 3): NODETAILS (v případě --directory), WRONG (u řady testů, funguje --parse-only)
+Vaše hodnocení části 4): 1,50 bodů
+  Komentář hodnocení části 4): Report chyby v zadání
+Vaše hodnocení části 5): 1,30 bodů (po 30% korelaci 1,30 bodů)
+  Komentář hodnocení části 5) (srážky uváděny v minibodech, 1 bod = 100 minibodů): Ok, OOP +30
+
+Procentuální hodnocení jednotlivých kategorií skriptu parse.php:
+Lexikální analýza (detekce chyb): 97 %
+Syntaktická analýza (detekce chyb): 91 %
+Zpracování instrukcí (včetně chyb): 100 %
+Zpracování netriviálních programů: 100 %
+Rozšíření STATP 97 %
+Celkem bez rozšíření: 97 %
