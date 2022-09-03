@@ -1,0 +1,48 @@
+// Konstanty
+T_END = 20
+STEP_MIN = 0.01
+STEP_BASE = 0.1
+
+// Inicializace času a kroku
+step = STEP_BASE
+t = 0
+
+// Inicializace kalendáře, modelu, stavových proměnných (proměnné current_state)
+InitCalendar()
+InitModel()
+
+while (t < T_END):
+  // Zjištění koncového času (buď následující položka z kalendáře, nebo čas konce simulace – i pokud je kalendář prázdný)
+  next_time = 0
+  
+  // Provádění kroků spojité simulace, dokud se nedostaneme k diskrétní události z kalendáře
+  while (t < (next_time = Min(T_END, Calendar.Peek()?.time ?? T_END))):
+    SaveState()  // Uloží aktuální čas _t_ a stavy integrátorů
+
+    if ((t + step * 1.01) > next_time):  // Dokročení na událost v kalendáři
+      ContinuousSimStep(next_time - t)  // Krok spojité simulace (vyhodnocení stavových proměnných)
+      t = next_time
+    else:
+      ContinuousSimStep(step)
+      t += step  // Posun času
+     
+    new_state = StateCondition()  // Vyhodnocení stavových podmínek
+    if (current_state != new_state):  // Pokud se podmínka změnila
+      if (step <= STEP_MIN):  // Pokud jsme s krokem dosáhli minima, ...
+        current_state = new_state  // potvrdí se nový stav podmínek
+        StateEvent()  // a provede se stavová událost.
+        step = STEP_BASE  // Obnova velikosti kroku
+      else:
+        RestoreState()  // Obnoví aktuální čas _t_ a stavy integrátorů
+        step = step / 2  // Hledání času stavové události půlením intervalu
+        if (step < STEP_MIN):
+          step = STEP_MIN
+          
+  // Provedení naplánované diskrétní události z kalendáře
+  next_event = Calendar.Pop()  // Odebrání první položky z kalendáře
+  
+  if (next_event == NULL):
+    break;
+
+  t = next_event.time
+  next_event.Behaviour()
