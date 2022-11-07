@@ -1,6 +1,6 @@
-# LeO@FIT
+# Bc. LeO@FIT
 ### a.k.a. tryharding.
-V tomto repozitáři udržuji všechna zveřejnitelná řešení projektů, úkolů a různých prací, která mě potkala během bakalářského studia na [Fakultě informačních technologií VUT v Brně](https://fit.vut.cz). Povinné předměty jsou rozděleny po semestrech. Ke každému předmětu jsou (či budou) v jeho `README` nějaké moje informace a poznatky, které se při studiu mohou hodit, spolu s mými poznámkami, studijními materiály, které jsem si k němu sepsal.
+V tomto repozitáři udržuji všechna zveřejnitelná řešení projektů, úkolů a různých prací, která mě potkala během **bakalářského** studia na [Fakultě informačních technologií VUT v Brně](https://fit.vut.cz). Povinné předměty jsou rozděleny po semestrech. Ke každému předmětu jsou (či budou) v jeho `README` nějaké moje informace a poznatky, které se při studiu mohou hodit, spolu s mými poznámkami, studijními materiály, které jsem si k němu sepsal.
 
 ## Obsah
 ### 1. semestr
@@ -60,4 +60,4 @@ _Softwarové produkty_ dostupné v tomto repozitáři _(= zdrojové soubory, dok
 
 Výše uvedené v obecnosti neplatí na uvedená zadání projektů. Protože jde v podstatě o interní informace, ke kterým je navíc těžké najít konkrétní autory, jde jen o zestručněné výcucy, neručím za jejich obsah a pokud mě o to někdo relevantní požádá, i to málo smažu.
 
-Copyright © 2020 Ondřej Ondryáš
+Copyright © 2019–2022 Ondřej Ondryáš
