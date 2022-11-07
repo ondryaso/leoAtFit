@@ -1,9 +1,7 @@
 # Formální jazyky a překladače
-### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/13981/.cs).
+### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/224912/.cs).
 
 ## Výpisky ke zkoušce
-**Budou doplněny, až se zase dostanu ke scanneru.**
-
 Obsah PDF:
 - 1 (1a): Přehled pojmů (řetězec, jazyk)
 - 2 (1b): Regulární výraz, konečný automat, bezkontextová gramatika

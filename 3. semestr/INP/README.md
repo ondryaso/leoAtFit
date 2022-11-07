@@ -1,9 +1,7 @@
 # Návrh počítačových systémů
-### Ak. rok 2020/2021. (https://www.fit.vut.cz/study/course/14003/.cs)
+### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/224935/.cs)
 
 ## Výpisky z přednášek
-**Budou doplněny, až se zase dostanu ke scanneru.**
-
 Obsah PDF:
 - 1 (3): Kódy pro opravu a detekci chyb (paritní kód, ztrojení, Hammingův kód)
 - 2 (4): ISA; Pipelining, RISC

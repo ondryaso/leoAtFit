@@ -1,5 +1,5 @@
 # Jazyk C
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13315/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210310/.cs).
 
 <img alt=":PePePepe:" width="24px" src="https://cdn.discordapp.com/emojis/490992251938406402.png?v=1" /> good guy. Ke zkoušce si dobře projděte piny na Discordu (bájný soubor _tryharding.zip_) a pozor na baity.
 

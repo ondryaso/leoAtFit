@@ -1,8 +1,5 @@
 # Matematická analýza 2
-### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/13994/.cs).
-
-## Tahák ke zkoušce
-**Bude doplněn, až se zase dostanu ke scanneru.**
+### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/224925/.cs).
 
 ## Domácí úkoly
 Všechny úkoly byly vyřešeny správně.

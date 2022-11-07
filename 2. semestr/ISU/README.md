@@ -1,5 +1,5 @@
 # Programování na strojové úrovni
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13275/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210277/.cs).
 
 **Všechny moje (programové) materiály k tomuto předmětu najdete v repozitáři [isu-examples](https://github.com/ondryaso/isu-examples).**
 

@@ -1,5 +1,5 @@
 # Návrh číslicových systémů
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13327/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210322/.cs).
 
 Zvláštní předmět. Většinou zcela ignorovaný, na zkoušku se dá naučit ze streamů, ale aspoň mi _na rychlost 2×_ přišel vcelku zajímavý.
 

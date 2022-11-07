@@ -1,5 +1,5 @@
 # Elektronika pro informační technologie
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13300/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210297/.cs).
 
 ## Projekt
 Hodnocení: 10/12

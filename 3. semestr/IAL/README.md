@@ -1,9 +1,7 @@
 # Algoritmy
-### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/13948/.cs).
+### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/224885/.cs).
 
 ## Výpisky z přednášek
-**Budou doplněny, až se zase dostanu ke scanneru.**
-
 Obsah PDF:
 - 1 (1): Řazení – přehled pojmů, Select sort
 - 2 (1b): **Bubble sort**

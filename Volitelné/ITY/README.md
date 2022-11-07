@@ -1,5 +1,5 @@
 # Typografie a publikování
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13366/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210359/.cs).
 
 Tento předmět by se měl jmenovat prostě _Sazba v LaTeXu_.
 

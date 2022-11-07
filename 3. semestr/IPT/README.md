@@ -1,8 +1,5 @@
 # Pravděpodobnost a statistika
-### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/14011/.cs).
-
-## Tahák ke zkoušce
-**Bude doplněn, až se zase dostanu ke scanneru.**
+### Ak. rok 2020/2021. [Karta předmětu](https://www.fit.vut.cz/study/course/224935/.cs).
 
 ## Domácí úkoly
 - 1: Jednoduchá a podmíněná pravděpodobnost

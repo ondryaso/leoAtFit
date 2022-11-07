@@ -1,5 +1,5 @@
 # Úvod do softwarového inženýrství
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13367/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210360/.cs).
 
 Choďte na Křenu. Není to taková hrůza, jak se říká, jen to chce trochu víc času. Jednoho dne zjistíte, že to, o čem se v IUS povídá, není _úplně od věci_.
 

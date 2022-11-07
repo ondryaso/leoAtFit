@@ -1,5 +1,5 @@
 # Lineární algebra
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13317/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210312/.cs).
 
 ## Důkaz |AB| = |A|⋅|B|
 Doc. Hliněná na jedné přednášce slíbila bonusový bod za důkaz platnosti výše uvedeného vztahu determinantů matic. Mé řešení není vůbec neprůstřelné (stále jsem skeptický hlavně co se týče mého zdůvodnění, proč má být součin trojúhleníkových matic opět trojúhelníkovou maticí), ale bonusový bodík si vydělalo.

@@ -1,5 +1,5 @@
 # Operační systémy
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13332/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210327/.cs).
 
 ## Materiály ke studiu
 IOS má vcelku dobré prezentace, doporučuji projet si to spolu se záznamy na rychlost alespoň 2× (je to pak vlastně velmi zajímavý předmět). Jistý _kůň_ z přednášek a prezentací vytvořil vcelku ucelený soupis, který jsem se poté jal upravovat a rozšiřovat. Najdete jej [v tomto repozitáři](https://github.com/ondryaso/FIT-IOS-notes), dá se to brát jako taková studijní opora, budu rád za případné pull requesty.

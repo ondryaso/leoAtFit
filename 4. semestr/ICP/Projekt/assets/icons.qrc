@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="prefix">
+    <file>camera.png</file>
+    <file>load.png</file>
+    <file>stop.png</file>
+    <file>topic.png</file>
+    <file>message.png</file>
+    <file>plus.png</file>
+    <file>save.png</file>
+    <file>cross.png</file>
+    <file>arrow.png</file>
+  </qresource>
+  <qresource prefix="widgets">
+    <file>temperature.png</file>
+    <file>text.png</file>
+    <file>power.png</file>
+  </qresource>
+</RCC>

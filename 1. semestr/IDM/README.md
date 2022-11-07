@@ -1,5 +1,5 @@
 # Diskrétní matematika
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13295/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210292/.cs).
 
 ## Domácí úkol
 Hodnocení: 9/10

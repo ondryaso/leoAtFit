@@ -1,5 +1,5 @@
 # Základy počítačové grafiky
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13375/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210365/.cs).
 
 ## Projekt
 Hodnocení: 30/30

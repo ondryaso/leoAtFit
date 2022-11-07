@@ -1,5 +1,5 @@
 # Základy programování
-### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/13376/.cs).
+### Ak. rok 2019/2020. [Karta předmětu](https://www.fit.vut.cz/study/course/210366/.cs).
 
 ## Projekt 1
 Hodnocení: 5/5 (+prémie)
